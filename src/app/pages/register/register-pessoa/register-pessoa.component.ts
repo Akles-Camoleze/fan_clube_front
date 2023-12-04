@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {CustomValidators} from "../../../utils/CustomValidators";
+import {CustomValidators} from "../../../../utils/CustomValidators";
 
 @Component({
   selector: 'app-register-pessoa',

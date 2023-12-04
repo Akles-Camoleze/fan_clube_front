@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {ToolbarModule} from "primeng/toolbar";
 import {SplitButtonModule} from "primeng/splitbutton";
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './pages/login/login.component';
 import {InputTextModule} from "primeng/inputtext";
 import {CardModule} from "primeng/card";
 import {ToastrModule} from "ngx-toastr";
@@ -13,10 +13,10 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {Interceptor} from "../utils/interceptor";
 import {ReactiveFormsModule} from "@angular/forms";
 import {UsuarioService} from "./services/usuario.service";
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './pages/register/register.component';
 import {CalendarModule} from "primeng/calendar";
 import {InputMaskModule} from "primeng/inputmask";
-import { RegisterPessoaComponent } from './register/register-pessoa/register-pessoa.component';
+import { RegisterPessoaComponent } from './pages/register/register-pessoa/register-pessoa.component';
 import {InputNumberModule} from "primeng/inputnumber";
 
 @NgModule({
