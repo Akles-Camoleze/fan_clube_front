@@ -6,8 +6,13 @@ import {RegisterPessoaComponent} from "./pages/register/register-pessoa/register
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: "full"
+  },
+  {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: 'register',
