@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {UsuarioService} from "../../services/usuario.service";
+import {UsuarioService} from "../services/usuario.service";
 
 @Component({
   selector: 'app-login',
@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
     this.usuarioService.login(this.email!.value, this.password!.value).subscribe(usuario => {
       console.log(usuario);
     });
-
   }
 
 }

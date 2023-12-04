@@ -1,0 +1,52 @@
+<div id="panel">
+  <p-card>
+    <div id="inside-panel">
+      <div id="left-panel">
+        <h3 id="title">Cadastro</h3>
+        <form [formGroup]="form">
+          <div id="inputs">
+            <input pInputText placeholder="Nome" formControlName="name"
+                   [class.invalid-input]="name?.invalid && email?.touched">
+
+            <p-calendar
+              placeholder="XX/XX/XXX"
+              formControlName="date"
+              [class.invalid-input]="email?.invalid && email?.touched">
+            </p-calendar>
+
+              <p-inputMask
+                mask="(99)99999-9999"
+                formControlName="phone"
+                placeholder="(99)99999-9999"
+                [class.invalid-input]="phone?.invalid && phone?.touched">
+              </p-inputMask>
+
+            <input pInputText placeholder="Email" formControlName="email"
+                   [class.invalid-input]="email?.invalid && email?.touched">
+
+            <input pInputText placeholder="Senha" type="password" formControlName="password"
+                   [class.invalid-input]="password?.invalid && password?.touched">
+
+            <input pInputText placeholder="Confirmar" type="password" formControlName="confirm"
+                   [class.invalid-input]="confirm?.invalid && confirm?.touched">
+          </div>
+        </form>
+
+        <div id="buttons">
+          <p-button
+            label="Cadastar"
+            [disabled]="form.invalid"
+            (onClick)="enter()"
+            styleClass="p-button-raised p-button-text p-button-secondary p-button-login">
+          </p-button>
+
+          <span style="color: #FFF">
+            Já possui conta? <p-button label="Entrar" styleClass="p-button-link color-white"></p-button>
+          </span>
+        </div>
+      </div>
+
+      <img src="/assets/torcida.png" alt="torcida" style="height: 500px">
+    </div>
+  </p-card>
+</div>
