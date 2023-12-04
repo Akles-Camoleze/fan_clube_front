@@ -9,7 +9,7 @@
                    [class.invalid-input]="name?.invalid && email?.touched">
 
             <p-calendar
-              placeholder="XX/XX/XXX"
+              placeholder="XX/XX/XXXX"
               formControlName="date"
               [class.invalid-input]="email?.invalid && email?.touched">
             </p-calendar>
@@ -41,7 +41,12 @@
           </p-button>
 
           <span style="color: #FFF">
-            Já possui conta? <p-button label="Entrar" styleClass="p-button-link color-white"></p-button>
+            Já possui conta?
+            <p-button
+              label="Entrar"
+              styleClass="p-button-link color-white"
+              (onClick)="goToLogin()">
+            </p-button>
           </span>
         </div>
       </div>

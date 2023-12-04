@@ -1,6 +1,7 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UsuarioService} from "../services/usuario.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,11 @@ import {UsuarioService} from "../services/usuario.service";
 export class RegisterComponent {
   form: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private usuarioService: UsuarioService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private usuarioService: UsuarioService,
+    private router: Router
+  ) {
     this.form = this.formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
       date: new FormControl('', [Validators.required]),
@@ -54,4 +59,9 @@ export class RegisterComponent {
     });
 
   }
+
+  goToLogin(): void {
+    this.router.navigate(['/login']);
+  }
+
 }
