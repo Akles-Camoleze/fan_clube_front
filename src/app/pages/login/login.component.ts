@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UsuarioService} from "../../services/usuario.service";
 import {Router} from "@angular/router";
+import {UsuarioModel} from "../../models/usuario.model";
 
 @Component({
   selector: 'app-login',
@@ -35,8 +36,8 @@ export class LoginComponent implements OnInit {
 
   enter(): void {
     if (this.form.invalid) return;
-
-    this.usuarioService.login(this.email!.value, this.password!.value).subscribe(usuario => {
+    const usuario: UsuarioModel = {email: this.email!.value, senha: this.password!.value}
+    this.usuarioService.login(usuario).subscribe(usuario => {
       console.log(usuario);
     });
   }
