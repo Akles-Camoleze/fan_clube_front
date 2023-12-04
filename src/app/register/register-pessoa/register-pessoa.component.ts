@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {CustomValidators} from "../../../utils/CustomValidators";
@@ -7,7 +7,6 @@ import {CustomValidators} from "../../../utils/CustomValidators";
   selector: 'app-register-pessoa',
   templateUrl: './register-pessoa.component.html',
   styleUrls: ['./register-pessoa.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class RegisterPessoaComponent {
   form: FormGroup;
@@ -73,7 +72,7 @@ export class RegisterPessoaComponent {
     if (this.form.invalid) return;
   }
 
-  goToLogin(): void {
-    this.router.navigate(['/login']);
+  backToUserRegister(): void {
+    this.router.navigate(['/register']);
   }
 }

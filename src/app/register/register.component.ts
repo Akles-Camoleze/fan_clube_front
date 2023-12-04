@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UsuarioService} from "../services/usuario.service";
 import {Router} from "@angular/router";
@@ -7,19 +7,16 @@ import {Router} from "@angular/router";
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class RegisterComponent {
   form: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
-    private usuarioService: UsuarioService,
     private router: Router
   ) {
     this.form = this.formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      lastname: new FormControl('', [Validators.required, Validators.minLength(3)]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(8)]),
       confirm: new FormControl('', [Validators.required, Validators.minLength(8)]),
@@ -44,11 +41,7 @@ export class RegisterComponent {
 
   enter(): void {
     if (this.form.invalid) return;
-
-    this.usuarioService.login(this.email!.value, this.password!.value).subscribe(usuario => {
-      console.log(usuario);
-    });
-
+    this.router.navigate(['/register', 'personal-data'])
   }
 
   goToLogin(): void {
