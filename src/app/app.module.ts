@@ -5,16 +5,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {ToolbarModule} from "primeng/toolbar";
 import {SplitButtonModule} from "primeng/splitbutton";
+import { LoginComponent } from './login/login/login.component';
+import {InputTextModule} from "primeng/inputtext";
+import {CardModule} from "primeng/card";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ToolbarModule,
-    SplitButtonModule
+    SplitButtonModule,
+    InputTextModule,
+    CardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
