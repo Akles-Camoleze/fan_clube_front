@@ -28,10 +28,12 @@
             </p-calendar>
 
             <p-inputMask
+              #input
               mask="(99)99999-9999"
               formControlName="phone"
               placeholder="(99)99999-9999"
-              [class.invalid-input]="phone?.invalid && phone?.touched">
+              [class.invalid-input]="phone?.invalid && phone?.touched"
+              [unmask]="true">
             </p-inputMask>
           </div>
 

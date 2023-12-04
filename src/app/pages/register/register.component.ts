@@ -1,13 +1,14 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {Usuario} from "../../models/Usuario";
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   form: FormGroup;
 
   constructor(
@@ -20,6 +21,14 @@ export class RegisterComponent {
       password: new FormControl('', [Validators.required, Validators.minLength(8)]),
       confirm: new FormControl('', [Validators.required, Validators.minLength(8)]),
     })
+  }
+
+  ngOnInit(): void {
+    if (window.history.state.usuario) {
+      const usuario: Usuario = window.history.state.usuario;
+      this.form.get('name')?.setValue(usuario.nome);
+      this.form.get('email')?.setValue(usuario.email);
+    }
   }
 
   get name() {
@@ -38,9 +47,18 @@ export class RegisterComponent {
     return this.form.get('password');
   }
 
-  enter(): void {
+  next(): void {
     if (this.form.invalid) return;
-    this.router.navigate(['/register', 'personal-data'])
+    const usuario: Usuario = {
+      nome: this.name?.value,
+      email: this.email?.value,
+      senha: this.password?.value,
+      idTipoUsuario: 2
+    }
+
+    this.router.navigate(['/register', 'personal-data'], {
+      state: {usuario}
+    })
   }
 
   goToLogin(): void {

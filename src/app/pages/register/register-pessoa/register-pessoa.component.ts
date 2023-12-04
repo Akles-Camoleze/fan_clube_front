@@ -1,19 +1,30 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {CustomValidators} from "../../../../utils/CustomValidators";
+import {Usuario} from "../../../models/Usuario";
+import {PessoaService} from "../../../services/pessoa.service";
+import {EnderecoService} from "../../../services/endereco.service";
+import {UsuarioService} from "../../../services/usuario.service";
+import {Endereco} from "../../../models/Endereco";
+import {Observable, switchMap} from "rxjs";
+import {Pessoa} from "../../../models/Pessoa";
 
 @Component({
   selector: 'app-register-pessoa',
   templateUrl: './register-pessoa.component.html',
   styleUrls: ['./register-pessoa.component.scss'],
 })
-export class RegisterPessoaComponent {
+export class RegisterPessoaComponent implements OnInit {
   form: FormGroup;
+  usuario!: Usuario;
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private pessoaService: PessoaService,
+    private enderecoService: EnderecoService,
+    private usuarioService: UsuarioService
   ) {
     this.form = this.formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -30,6 +41,10 @@ export class RegisterPessoaComponent {
         Validators.maxLength(2)
       ]),
     })
+  }
+
+  ngOnInit(): void {
+    this.usuario = window.history.state.usuario;
   }
 
   get name() {
@@ -70,9 +85,42 @@ export class RegisterPessoaComponent {
 
   enter(): void {
     if (this.form.invalid) return;
+    const endereco: Endereco = {
+      rua: this.street?.value,
+      numero: this.number?.value,
+      bairro: this.district?.value,
+      idCidade: 1
+    }
+    this.enderecoService.register(endereco).subscribe((endereco: any): void => {
+      this.registerPerson(endereco).subscribe((pessoa: Pessoa): void => {
+        this.registerUser(pessoa).subscribe((usuario: Usuario): void => {
+          console.log(usuario);
+        });
+      });
+    });
+  }
+
+  registerPerson(endereco: Endereco): Observable<any> {
+    console.log(this.phone?.value);
+    const pessoa: Pessoa = {
+      dataNascimento: this.birthdate?.value,
+      nome: this.name?.value,
+      sobrenome: this.lastname?.value,
+      telefone: this.phone?.value,
+      idEndereco: endereco.id
+    };
+    return this.pessoaService.register(pessoa);
+  }
+
+  registerUser(pessoa: Pessoa): Observable<any> {
+    this.usuario.idPessoa = pessoa.id;
+    this.usuario.idTipoUsuario = 2;
+    return this.usuarioService.register(this.usuario);
   }
 
   backToUserRegister(): void {
-    this.router.navigate(['/register']);
+    this.router.navigate(['/register'], {
+      state: {usuario: this.usuario}
+    });
   }
 }
