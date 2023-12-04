@@ -12,6 +12,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {Interceptor} from "../utils/interceptor";
 import {ReactiveFormsModule} from "@angular/forms";
+import {UsuarioService} from "./services/usuario.service";
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     ReactiveFormsModule,
   ],
   providers: [
+    UsuarioService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
