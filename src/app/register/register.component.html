@@ -6,20 +6,7 @@
         <form [formGroup]="form">
           <div id="inputs">
             <input pInputText placeholder="Nome" formControlName="name"
-                   [class.invalid-input]="name?.invalid && email?.touched">
-
-            <p-calendar
-              placeholder="XX/XX/XXXX"
-              formControlName="date"
-              [class.invalid-input]="email?.invalid && email?.touched">
-            </p-calendar>
-
-              <p-inputMask
-                mask="(99)99999-9999"
-                formControlName="phone"
-                placeholder="(99)99999-9999"
-                [class.invalid-input]="phone?.invalid && phone?.touched">
-              </p-inputMask>
+                   [class.invalid-input]="name?.invalid && name?.touched">
 
             <input pInputText placeholder="Email" formControlName="email"
                    [class.invalid-input]="email?.invalid && email?.touched">
@@ -34,7 +21,7 @@
 
         <div id="buttons">
           <p-button
-            label="Cadastar"
+            label="Próximo"
             [disabled]="form.invalid"
             (onClick)="enter()"
             styleClass="p-button-raised p-button-text p-button-secondary p-button-login">

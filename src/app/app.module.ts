@@ -16,12 +16,15 @@ import {UsuarioService} from "./services/usuario.service";
 import { RegisterComponent } from './register/register.component';
 import {CalendarModule} from "primeng/calendar";
 import {InputMaskModule} from "primeng/inputmask";
+import { RegisterPessoaComponent } from './register/register-pessoa/register-pessoa.component';
+import {InputNumberModule} from "primeng/inputnumber";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    RegisterPessoaComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +39,7 @@ import {InputMaskModule} from "primeng/inputmask";
     ReactiveFormsModule,
     CalendarModule,
     InputMaskModule,
+    InputNumberModule,
   ],
   providers: [
     UsuarioService,

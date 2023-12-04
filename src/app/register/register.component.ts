@@ -19,8 +19,7 @@ export class RegisterComponent {
   ) {
     this.form = this.formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      date: new FormControl('', [Validators.required]),
-      phone: new FormControl('', [Validators.required]),
+      lastname: new FormControl('', [Validators.required, Validators.minLength(3)]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(8)]),
       confirm: new FormControl('', [Validators.required, Validators.minLength(8)]),
@@ -28,19 +27,11 @@ export class RegisterComponent {
   }
 
   get name() {
-    return this.form.get('email');
-  }
-
-  get date() {
-    return this.form.get('email');
-  }
-
-  get phone() {
-    return this.form.get('email');
+    return this.form.get('name');
   }
 
   get confirm() {
-    return this.form.get('email');
+    return this.form.get('confirm');
   }
 
   get email() {
