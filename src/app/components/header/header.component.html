@@ -1,16 +1,17 @@
 <p-toolbar>
   <div class="p-toolbar-group-start">
-    <img ngSrc="assets/cruzeiro_do_sul.png" alt="logo" height="40" width="40">
+    <p-button styleClass="p-button-text p-raised-button no-border" (onClick)="goToHome()">
+      <img ngSrc="assets/cruzeiro_do_sul.png" alt="logo" height="40" width="40">
+    </p-button>
   </div>
   <div id="title" class="p-toolbar-group-center">
     <h1>Azul Celeste</h1>
   </div>
   <div class="p-toolbar-group-end">
-    <p-button
-      id="avatar"
-      icon="pi pi-user"
-      styleClass="p-button-rounded p-button-outlined"
-      [style]="{'background-color': '#FFF', color: 'var(--azul-escuro)'}">
-    </p-button>
+    <p-splitButton [model]="model" styleClass="p-button-text mr-2 mb-2 no-border" appendTo="body">
+      <ng-template pTemplate="dropdownicon">
+          <i id="menu" class="pi pi-bars"></i>
+      </ng-template>
+    </p-splitButton>
   </div>
 </p-toolbar>

@@ -57,3 +57,12 @@ body {
   background-color: var(--azul-escuro) !important;
   border: 1px solid var(--azul-escuro) !important;
 }
+
+.no-border {
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.no-border .p-button:focus {
+  box-shadow: none !important;
+}
