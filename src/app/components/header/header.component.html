@@ -8,10 +8,9 @@
     <h1>Azul Celeste</h1>
   </div>
   <div class="p-toolbar-group-end">
-    <p-splitButton [model]="model" styleClass="p-button-text mr-2 mb-2 no-border" appendTo="body">
-      <ng-template pTemplate="dropdownicon">
-          <i id="menu" class="pi pi-bars"></i>
-      </ng-template>
-    </p-splitButton>
+    <p-menu #menu [model]="model" [popup]="true"></p-menu>
+    <p-button (click)="menu.toggle($event)" styleClass="no-border p-button-text">
+      <i id="menu" class="pi pi-bars"></i>
+    </p-button>
   </div>
 </p-toolbar>

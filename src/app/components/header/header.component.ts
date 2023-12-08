@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {MenuItem} from "primeng/api";
 
@@ -7,7 +7,7 @@ import {MenuItem} from "primeng/api";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements AfterViewInit {
+export class HeaderComponent implements AfterViewInit, OnInit {
   model!: MenuItem[];
 
   constructor(private router: Router, private el: ElementRef) {
@@ -21,7 +21,8 @@ export class HeaderComponent implements AfterViewInit {
       },
       {
         icon: 'pi pi-users',
-        label: 'Gerenciar Adm.'
+        label: 'Gerenciar Adm.',
+        command: () => this.router.navigate(['/panel-adm'])
       },
       {
         icon: 'pi pi-sign-out',

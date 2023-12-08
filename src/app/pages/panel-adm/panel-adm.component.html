@@ -1,0 +1,9 @@
+<app-header></app-header>
+<div id="panel">
+  <p-panelMenu styleClass="sidemenu" [model]="items" [style]="{width: '200px'}" ></p-panelMenu>
+  <div style="width: 100%;">
+    <p-card>
+      <router-outlet></router-outlet>
+    </p-card>
+  </div>
+</div>

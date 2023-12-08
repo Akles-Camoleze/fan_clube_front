@@ -36,6 +36,10 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent
+  },
+  {
+    path: 'panel-adm',
+    loadChildren: () => import('./pages/panel-adm/panel-adm.module').then(m => m.PanelAdmModule)
   }
 ];
 

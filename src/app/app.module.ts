@@ -23,6 +23,11 @@ import { HeaderComponent } from './components/header/header.component';
 import {NgOptimizedImage} from "@angular/common";
 import {AvatarModule} from "primeng/avatar";
 import { DatePipe } from './pipes/date.pipe';
+import { PanelAdmComponent } from './pages/panel-adm/panel-adm.component';
+import { AdmManagerComponent } from './pages/panel-adm/adm-manager/adm-manager.component';
+import {MenuModule} from "primeng/menu";
+import {SlideMenuModule} from "primeng/slidemenu";
+import {PanelMenuModule} from "primeng/panelmenu";
 
 @NgModule({
   declarations: [
@@ -32,7 +37,9 @@ import { DatePipe } from './pipes/date.pipe';
     RegisterPessoaComponent,
     HomeComponent,
     HeaderComponent,
-    DatePipe
+    DatePipe,
+    PanelAdmComponent,
+    AdmManagerComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +57,9 @@ import { DatePipe } from './pipes/date.pipe';
     InputNumberModule,
     NgOptimizedImage,
     AvatarModule,
+    MenuModule,
+    SlideMenuModule,
+    PanelMenuModule,
   ],
   providers: [
     UsuarioService,
