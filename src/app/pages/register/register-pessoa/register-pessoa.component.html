@@ -1,6 +1,9 @@
 <div id="panel">
-  <p-card>
-    <div id="inside-panel">
+  <p-card styleClass="initial-card">
+    <ng-template pTemplate="content">
+      <div class="blue-card">
+
+        <div id="inside-panel">
       <span id="back-button" class="white-button">
         <p-button
           (onClick)="backToUserRegister()"
@@ -8,67 +11,69 @@
           styleClass="p-button-rounded p-button-secondary p-button-text">
         </p-button>
       </span>
-      <h3 id="title">Dados Pessoais</h3>
-      <form [formGroup]="form">
-        <div id="inputs">
+          <h3 id="title">Dados Pessoais</h3>
+          <form [formGroup]="form">
+            <div id="inputs">
 
-          <div class="row">
-            <input pInputText placeholder="Nome" formControlName="name"
-                   [class.invalid-input]="name?.invalid && name?.touched">
+              <div class="row">
+                <input pInputText placeholder="Nome" formControlName="name"
+                       [class.invalid-input]="name?.invalid && name?.touched">
 
-            <input pInputText placeholder="Sobrenome" formControlName="lastname"
-                   [class.invalid-input]="lastname?.invalid && lastname?.touched">
-          </div>
+                <input pInputText placeholder="Sobrenome" formControlName="lastname"
+                       [class.invalid-input]="lastname?.invalid && lastname?.touched">
+              </div>
 
-          <div class="row">
-            <p-calendar
-              placeholder="XX/XX/XXXX"
-              formControlName="birthdate"
-              [class.invalid-input]="birthdate?.invalid && birthdate?.touched">
-            </p-calendar>
+              <div class="row">
+                <p-calendar
+                  placeholder="XX/XX/XXXX"
+                  formControlName="birthdate"
+                  [class.invalid-input]="birthdate?.invalid && birthdate?.touched">
+                </p-calendar>
 
-            <p-inputMask
-              #input
-              mask="(99)99999-9999"
-              formControlName="phone"
-              placeholder="(99)99999-9999"
-              [class.invalid-input]="phone?.invalid && phone?.touched"
-              [unmask]="true">
-            </p-inputMask>
-          </div>
+                <p-inputMask
+                  #input
+                  mask="(99)99999-9999"
+                  formControlName="phone"
+                  placeholder="(99)99999-9999"
+                  [class.invalid-input]="phone?.invalid && phone?.touched"
+                  [unmask]="true">
+                </p-inputMask>
+              </div>
 
 
-          <div class="row">
-            <input pInputText placeholder="Rua" formControlName="street"
-                   [class.invalid-input]="street?.invalid && street?.touched">
+              <div class="row">
+                <input pInputText placeholder="Rua" formControlName="street"
+                       [class.invalid-input]="street?.invalid && street?.touched">
 
-            <input pInputText placeholder="Número" formControlName="number" type="number"
-                   [class.invalid-input]="number?.invalid && number?.touched" style="width: 100px !important;">
-          </div>
+                <input pInputText placeholder="Número" formControlName="number" type="number"
+                       [class.invalid-input]="number?.invalid && number?.touched" style="width: 100px !important;">
+              </div>
 
-          <div class="row">
-            <input pInputText placeholder="Bairro" formControlName="district"
-                   [class.invalid-input]="district?.invalid && district?.touched">
+              <div class="row">
+                <input pInputText placeholder="Bairro" formControlName="district"
+                       [class.invalid-input]="district?.invalid && district?.touched">
 
-            <input pInputText placeholder="Cidade" formControlName="city"
-                   [class.invalid-input]="city?.invalid && city?.touched">
+                <input pInputText placeholder="Cidade" formControlName="city"
+                       [class.invalid-input]="city?.invalid && city?.touched">
 
-            <input pInputText placeholder="UF" formControlName="uf"
-                   [class.invalid-input]="uf?.invalid && uf?.touched">
+                <input pInputText placeholder="UF" formControlName="uf"
+                       [class.invalid-input]="uf?.invalid && uf?.touched">
+              </div>
+
+            </div>
+          </form>
+
+          <div id="buttons">
+            <p-button
+              label="Finalizar"
+              [disabled]="form.invalid"
+              (onClick)="enter()"
+              styleClass="p-button-raised p-button-text p-button-secondary p-button-login">
+            </p-button>
           </div>
 
         </div>
-      </form>
-
-      <div id="buttons">
-        <p-button
-          label="Finalizar"
-          [disabled]="form.invalid"
-          (onClick)="enter()"
-          styleClass="p-button-raised p-button-text p-button-secondary p-button-login">
-        </p-button>
       </div>
-
-    </div>
+    </ng-template>
   </p-card>
 </div>

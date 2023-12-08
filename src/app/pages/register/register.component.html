@@ -1,33 +1,30 @@
 <div id="panel">
-  <p-card>
-    <div id="inside-panel">
-      <div id="left-panel">
-        <h3 id="title">Cadastro</h3>
-        <form [formGroup]="form">
-          <div id="inputs">
-            <input pInputText placeholder="Nome" formControlName="name"
-                   [class.invalid-input]="name?.invalid && name?.touched">
-
-            <input pInputText placeholder="Email" formControlName="email"
-                   [class.invalid-input]="email?.invalid && email?.touched">
-
-            <input pInputText placeholder="Senha" type="password" formControlName="password"
-                   [class.invalid-input]="password?.invalid && password?.touched">
-
-            <input pInputText placeholder="Confirmar" type="password" formControlName="confirm"
-                   [class.invalid-input]="confirm?.invalid && confirm?.touched">
-          </div>
-        </form>
-
-        <div id="buttons">
-          <p-button
-            label="Próximo"
-            [disabled]="form.invalid"
-            (onClick)="next()"
-            styleClass="p-button-raised p-button-text p-button-secondary p-button-login">
-          </p-button>
-
-          <span style="color: #FFF">
+  <p-card styleClass="initial-card">
+    <ng-template pTemplate="content">
+      <div class="blue-card">
+        <div id="inside-panel">
+          <div id="left-panel">
+            <h3 id="title">Cadastro</h3>
+            <form [formGroup]="form">
+              <div id="inputs">
+                <input pInputText placeholder="Nome" formControlName="name"
+                       [class.invalid-input]="name?.invalid && name?.touched">
+                <input pInputText placeholder="Email" formControlName="email"
+                       [class.invalid-input]="email?.invalid && email?.touched">
+                <input pInputText placeholder="Senha" type="password" formControlName="password"
+                       [class.invalid-input]="password?.invalid && password?.touched">
+                <input pInputText placeholder="Confirmar" type="password" formControlName="confirm"
+                       [class.invalid-input]="confirm?.invalid && confirm?.touched">
+              </div>
+            </form>
+            <div id="buttons">
+              <p-button
+                label="Próximo"
+                [disabled]="form.invalid"
+                (onClick)="next()"
+                styleClass="p-button-raised p-button-text p-button-secondary p-button-login">
+              </p-button>
+              <span style="color: #FFF">
             Já possui conta?
             <p-button
               label="Entrar"
@@ -35,10 +32,18 @@
               (onClick)="goToLogin()">
             </p-button>
           </span>
+            </div>
+          </div>
+          <img src="assets/torcida.png" alt="torcida" style="height: 500px">
         </div>
       </div>
-
-      <img src="assets/torcida.png" alt="torcida" style="height: 500px">
-    </div>
+    </ng-template>
   </p-card>
 </div>
+
+
+
+
+
+
+

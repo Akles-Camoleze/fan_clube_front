@@ -5,16 +5,18 @@
   --azul-escuro: #005ba2;
 }
 
-.p-card .p-card-content {
+.blue-card {
   padding: 0 !important;
-  background-color: #005ba2;
-  border-radius: 7px;
+  background-color: #005ba2 !important;
+  border-radius: 7px !important;
 }
 
-.p-card .p-card-body {
+.initial-card  .p-card-body {
   padding: 0 !important;
-  background-color: #005ba2;
-  border-radius: 7px;
+}
+
+.initial-card .p-card-content {
+  padding: 0 !important;
 }
 
 .p-button-login {
