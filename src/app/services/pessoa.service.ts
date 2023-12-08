@@ -12,7 +12,7 @@ export class PessoaService {
   constructor(private http: HttpClient) {
   }
 
-  public register(pessoa: Pessoa): Observable<any> {
-    return this.http.post(`${PATH_API}/person/register`, pessoa);
+  public register(pessoa: Pessoa): Observable<Pessoa> {
+    return this.http.post<Pessoa>(`${PATH_API}/person/register`, pessoa);
   }
 }

@@ -2,17 +2,17 @@
 
 <h1 id="title">Listagem de Eventos</h1>
 <div id="grid">
-  <p-card *ngFor="let evento of eventos" [header]="evento['nome']" [style]="{ width: '360px' }">
+  <p-card *ngFor="let evento of eventos" [header]="evento.nome" [style]="{ width: '360px' }">
     <ng-template pTemplate="header">
       <div style="width: 360px; height: 130px">
         <img
-          alt="Card"
-          [src]="evento['arquivo'] ? evento['arquivo']['caminho'] : 'assets/not_found.jpg'"
+          alt="Banner evento"
+          [src]="evento.arquivo ? evento.arquivo.caminho : 'assets/not_found.jpg'"
           style="width: 100%; height: 100%; object-fit: cover"/>
       </div>
     </ng-template>
     <ng-template pTemplate="subtitle">
-      <span><i class="pi pi-map-marker"></i></span>
+      <span><i class="pi pi-map-marker"></i> {{ evento.endereco.rua }}, {{ evento.endereco.rua }}</span>
     </ng-template>
     <ng-template pTemplate="content">
       <p>{{ evento['descricao'] }}</p>

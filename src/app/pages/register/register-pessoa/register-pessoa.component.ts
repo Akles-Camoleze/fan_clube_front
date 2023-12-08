@@ -9,6 +9,8 @@ import {UsuarioService} from "../../../services/usuario.service";
 import {Endereco} from "../../../models/Endereco";
 import {Observable, Subject, switchMap, takeUntil} from "rxjs";
 import {Pessoa} from "../../../models/Pessoa";
+import {Cidade} from "../../../models/Cidade";
+import {TipoUsuario} from "../../../models/TipoUsuario";
 
 @Component({
   selector: 'app-register-pessoa',
@@ -86,15 +88,18 @@ export class RegisterPessoaComponent implements OnInit {
 
   enter(): void {
     if (this.form.invalid) return;
-    const endereco: Endereco = {
-      rua: this.street?.value,
-      numero: this.number?.value,
-      bairro: this.district?.value,
-      idCidade: 1
-    }
+    const endereco: Endereco = new Endereco();
+    const cidade: Cidade = new Cidade();
+    cidade.id = 1;
+    endereco.rua = this.street?.value;
+    endereco.numero = this.number?.value;
+    endereco.bairro = this.district?.value;
+    endereco.bairro = this.district?.value;
+    endereco.cidade = cidade;
+
     this.enderecoService.register(endereco).pipe(
         takeUntil(this.destroy$),
-        switchMap((endereco: any) => this.registerPerson(endereco))
+        switchMap((endereco: Endereco) => this.registerPerson(endereco))
       ).pipe(
         takeUntil(this.destroy$),
         switchMap((pessoa: Pessoa) => this.registerUser(pessoa))
@@ -105,19 +110,20 @@ export class RegisterPessoaComponent implements OnInit {
 
   registerPerson(endereco: Endereco): Observable<any> {
     console.log(this.phone?.value);
-    const pessoa: Pessoa = {
-      dataNascimento: this.birthdate?.value,
-      nome: this.name?.value,
-      sobrenome: this.lastname?.value,
-      telefone: this.phone?.value,
-      idEndereco: endereco.id
-    };
+    const pessoa: Pessoa = new Pessoa();
+    pessoa.dataNascimento = this.birthdate?.value;
+    pessoa.nome = this.name?.value;
+    pessoa.sobrenome = this.lastname?.value;
+    pessoa.telefone = this.phone?.value;
+    pessoa.endereco = endereco;
     return this.pessoaService.register(pessoa);
   }
 
   registerUser(pessoa: Pessoa): Observable<any> {
-    this.usuario.idPessoa = pessoa.id;
-    this.usuario.idTipoUsuario = 2;
+    const tipoUsuario: TipoUsuario = new TipoUsuario();
+    tipoUsuario.id = 2;
+    this.usuario.pessoa = pessoa;
+    this.usuario.tipoUsuario = tipoUsuario;
     return this.usuarioService.register(this.usuario);
   }
 

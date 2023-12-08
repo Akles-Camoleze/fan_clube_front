@@ -38,7 +38,9 @@ export class LoginComponent implements OnInit {
 
   enter(): void {
     if (this.form.invalid) return;
-    const usuario: Usuario = {email: this.email!.value, senha: this.password!.value}
+    const usuario: Usuario = new Usuario();
+    usuario.email = this.email!.value;
+    usuario.senha = this.password!.value;
     this.login$ = this.usuarioService.login(usuario)
       .pipe(finalize((): void => this.login$?.unsubscribe()))
       .subscribe((): void => {

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {Usuario} from "../../models/Usuario";
+import {TipoUsuario} from "../../models/TipoUsuario";
 
 @Component({
   selector: 'app-register',
@@ -49,12 +50,13 @@ export class RegisterComponent implements OnInit {
 
   next(): void {
     if (this.form.invalid) return;
-    const usuario: Usuario = {
-      nome: this.name?.value,
-      email: this.email?.value,
-      senha: this.password?.value,
-      idTipoUsuario: 2
-    }
+    const usuario: Usuario = new Usuario();
+    const tipoUsuario: TipoUsuario = new TipoUsuario();
+    tipoUsuario.id = 2;
+    usuario.nome = this.name?.value;
+    usuario.email = this.email?.value;
+    usuario.senha = this.password?.value;
+    usuario.tipoUsuario = tipoUsuario;
 
     this.router.navigate(['/register', 'personal-data'], {
       state: {usuario}

@@ -11,7 +11,7 @@ export class EnderecoService {
 
   constructor(private http: HttpClient) { }
 
-  public register(endereco: Endereco): Observable<any> {
-    return this.http.post(`${PATH_API}/address/register`, endereco);
+  public register(endereco: Endereco): Observable<Endereco> {
+    return this.http.post<Endereco>(`${PATH_API}/address/register`, endereco);
   }
 }

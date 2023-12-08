@@ -1,7 +1,9 @@
+import {Cidade} from "./Cidade";
+
 export class Endereco {
-  id?: number;
-  idCidade?: number;
-  numero?: number;
-  rua?: string;
-  bairro?: string;
+  id!: number;
+  cidade!: Cidade;
+  numero!: number;
+  rua!: string;
+  bairro!: string;
 }

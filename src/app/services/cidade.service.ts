@@ -12,7 +12,7 @@ export class CidadeService {
   constructor(private http: HttpClient) {
   }
 
-  public register(cidade: Cidade): Observable<any> {
-    return this.http.post(`${PATH_API}/city/register`, cidade);
+  public register(cidade: Cidade): Observable<Cidade> {
+    return this.http.post<Cidade>(`${PATH_API}/city/register`, cidade);
   }
 }

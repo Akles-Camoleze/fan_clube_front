@@ -12,12 +12,12 @@ export class UsuarioService {
   constructor(private http: HttpClient) {
   }
 
-  login(usuario: Usuario): Observable<any> {
-    return this.http.post(`${PATH_API}/user/login`, usuario);
+  login(usuario: Usuario): Observable<Usuario> {
+    return this.http.post<Usuario>(`${PATH_API}/user/login`, usuario);
   }
 
-  register(usuario: Usuario): Observable<any> {
-    return this.http.post(`${PATH_API}/user/register`, usuario);
+  register(usuario: Usuario): Observable<Usuario> {
+    return this.http.post<Usuario>(`${PATH_API}/user/register`, usuario);
   }
 
 }
