@@ -1,0 +1,22 @@
+#grid {
+  display: flex;
+  gap: 60px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  margin-top: 40px;
+  padding: 20px;
+}
+
+#title {
+  color: var(--azul-escuro);
+  text-align: center;
+  margin-top: 50px;
+}
+
+#position-button {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+}
+

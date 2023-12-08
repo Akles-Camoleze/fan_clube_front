@@ -1,15 +1,38 @@
 <app-header></app-header>
 
-<p-card *ngFor="let evento of eventos" [header]="evento['nome']" [style]="{ width: '360px' }">
-  <ng-template pTemplate="header">
-    <img alt="Card" [ngSrc]="evento['arquivo'] ? evento['arquivo']['caminho'] : ''" fill/>
-  </ng-template>
-  <ng-template pTemplate="subHeader">
-    <span><i class="pi pi-map-marker"></i></span>
-  </ng-template>
-  <p>{{ evento['descricao'] }}</p>
-  <ng-template pTemplate="footer">
-    <p-button label="Save" icon="pi pi-check"></p-button>
-    <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary" [style]="{ 'margin-left': '.5em' }"></p-button>
-  </ng-template>
-</p-card>
+<h1 id="title">Listagem de Eventos</h1>
+<div id="grid">
+  <p-card *ngFor="let evento of eventos" [header]="evento['nome']" [style]="{ width: '360px' }">
+    <ng-template pTemplate="header">
+      <div style="width: 360px; height: 130px">
+        <img
+          alt="Card"
+          [src]="evento['arquivo'] ? evento['arquivo']['caminho'] : 'assets/not_found.jpg'"
+          style="width: 100%; height: 100%; object-fit: cover"/>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="subtitle">
+      <span><i class="pi pi-map-marker"></i></span>
+    </ng-template>
+    <ng-template pTemplate="content">
+      <p>{{ evento['descricao'] }}</p>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <div style="width: 100%">
+        <p-button
+          label="Inscrever-se"
+          icon="pi pi-calendar-plus"
+          styleClass="p-button-raised button-blue">
+        </p-button>
+      </div>
+    </ng-template>
+  </p-card>
+</div>
+
+<div id="position-button">
+  <p-button
+    icon="pi pi-plus"
+    styleClass="p-button-rounded p-button-raised button-blue">
+  </p-button>
+</div>
+
