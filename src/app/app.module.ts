@@ -22,6 +22,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import {NgOptimizedImage} from "@angular/common";
 import {AvatarModule} from "primeng/avatar";
+import { DatePipe } from './pipes/date.pipe';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {AvatarModule} from "primeng/avatar";
     RegisterComponent,
     RegisterPessoaComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    DatePipe
   ],
   imports: [
     BrowserModule,

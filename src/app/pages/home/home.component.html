@@ -12,10 +12,20 @@
       </div>
     </ng-template>
     <ng-template pTemplate="subtitle">
-      <span><i class="pi pi-map-marker"></i> {{ evento.endereco.rua }}, {{ evento.endereco.rua }}</span>
+      <span>
+        <i class="pi pi-map-marker"></i>
+        {{ evento.endereco.rua }},
+        {{ evento.endereco.numero }}
+        {{ evento.endereco.bairro }}
+        {{ evento.endereco.cidade.nome }} - {{ evento.endereco.cidade.uf }}
+      </span>
+      <div id="data" *ngIf="(evento.data | date) as data">
+        <span><i class="pi pi-calendar"></i> {{data.data}} </span>
+        <span><i class="pi pi-clock"></i> {{data.hora}}  </span>
+      </div>
     </ng-template>
     <ng-template pTemplate="content">
-      <p>{{ evento['descricao'] }}</p>
+      <p>{{ evento.descricao }}</p>
     </ng-template>
     <ng-template pTemplate="footer">
       <div style="width: 100%">
