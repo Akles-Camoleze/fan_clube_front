@@ -1,6 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import "primeicons/primeicons.css";
 
+:root {
+  --azul-escuro: #005ba2;
+}
+
 .p-card .p-card-content {
   padding: 0 !important;
   background-color: #005ba2;
@@ -29,4 +33,18 @@
 
 .white-button .p-button {
   color: white !important;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.p-toolbar {
+  background: var(--azul-escuro) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  height: 80px !important;
+  padding: 10px !important;
+  flex-wrap: nowrap !important;
 }

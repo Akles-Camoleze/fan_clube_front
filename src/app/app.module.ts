@@ -18,13 +18,19 @@ import {CalendarModule} from "primeng/calendar";
 import {InputMaskModule} from "primeng/inputmask";
 import { RegisterPessoaComponent } from './pages/register/register-pessoa/register-pessoa.component';
 import {InputNumberModule} from "primeng/inputnumber";
+import { HomeComponent } from './pages/home/home.component';
+import { HeaderComponent } from './components/header/header.component';
+import {NgOptimizedImage} from "@angular/common";
+import {AvatarModule} from "primeng/avatar";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    RegisterPessoaComponent
+    RegisterPessoaComponent,
+    HomeComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +46,8 @@ import {InputNumberModule} from "primeng/inputnumber";
     CalendarModule,
     InputMaskModule,
     InputNumberModule,
+    NgOptimizedImage,
+    AvatarModule,
   ],
   providers: [
     UsuarioService,

@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UsuarioService} from "../../services/usuario.service";
 import {Router} from "@angular/router";
 import {Usuario} from "../../models/Usuario";
+import {finalize, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,7 @@ import {Usuario} from "../../models/Usuario";
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
+  login$?: Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -37,13 +39,19 @@ export class LoginComponent implements OnInit {
   enter(): void {
     if (this.form.invalid) return;
     const usuario: Usuario = {email: this.email!.value, senha: this.password!.value}
-    this.usuarioService.login(usuario).subscribe(usuario => {
-      console.log(usuario);
-    });
+    this.login$ = this.usuarioService.login(usuario)
+      .pipe(finalize((): void => this.login$?.unsubscribe()))
+      .subscribe((): void => {
+        this.goToHome();
+      });
   }
 
-  goToregister(): void {
+  goToRegister(): void {
     this.router.navigate(['/register']);
+  }
+
+  goToHome(): void {
+    this.router.navigate(['/home']);
   }
 
 }

@@ -7,7 +7,7 @@ import {PessoaService} from "../../../services/pessoa.service";
 import {EnderecoService} from "../../../services/endereco.service";
 import {UsuarioService} from "../../../services/usuario.service";
 import {Endereco} from "../../../models/Endereco";
-import {Observable, switchMap} from "rxjs";
+import {Observable, Subject, switchMap, takeUntil} from "rxjs";
 import {Pessoa} from "../../../models/Pessoa";
 
 @Component({
@@ -18,6 +18,7 @@ import {Pessoa} from "../../../models/Pessoa";
 export class RegisterPessoaComponent implements OnInit {
   form: FormGroup;
   usuario!: Usuario;
+  private destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -91,13 +92,15 @@ export class RegisterPessoaComponent implements OnInit {
       bairro: this.district?.value,
       idCidade: 1
     }
-    this.enderecoService.register(endereco).subscribe((endereco: any): void => {
-      this.registerPerson(endereco).subscribe((pessoa: Pessoa): void => {
-        this.registerUser(pessoa).subscribe((usuario: Usuario): void => {
-          console.log(usuario);
-        });
+    this.enderecoService.register(endereco).pipe(
+        takeUntil(this.destroy$),
+        switchMap((endereco: any) => this.registerPerson(endereco))
+      ).pipe(
+        takeUntil(this.destroy$),
+        switchMap((pessoa: Pessoa) => this.registerUser(pessoa))
+      ).subscribe((): void => {
+        this.backToLogin();
       });
-    });
   }
 
   registerPerson(endereco: Endereco): Observable<any> {
@@ -122,5 +125,9 @@ export class RegisterPessoaComponent implements OnInit {
     this.router.navigate(['/register'], {
       state: {usuario: this.usuario}
     });
+  }
+
+  backToLogin(): void {
+    this.router.navigate(['/login']);
   }
 }
