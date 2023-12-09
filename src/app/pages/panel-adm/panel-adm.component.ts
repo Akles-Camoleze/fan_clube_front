@@ -3,7 +3,7 @@ import {MenuItem} from "primeng/api";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-adm-manager',
+  selector: 'app-user-manager',
   templateUrl: './panel-adm.component.html',
   styleUrls: ['./panel-adm.component.scss']
 })
@@ -16,7 +16,8 @@ export class PanelAdmComponent implements OnInit {
     this.items = [
       {
         icon: 'pi pi-users',
-        label: 'Gerenciar Administradores'
+        label: 'Gerenciar Usuários',
+        command: () => this.router.navigateByUrl('/panel-adm/user-manager')
       },
       {
         icon: 'pi pi-chart-bar',

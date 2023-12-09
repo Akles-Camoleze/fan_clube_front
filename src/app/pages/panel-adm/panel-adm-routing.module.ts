@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {AdmManagerComponent} from "./adm-manager/adm-manager.component";
+import {UserManagerComponent} from "./user-manager/user-manager.component";
 import {PanelAdmComponent} from "./panel-adm.component";
 import {EventReportComponent} from "./event-report/event-report.component";
 import {PersonReportComponent} from "./person-report/person-report.component";
@@ -12,12 +12,12 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'manage-adm',
+        redirectTo: 'user-manager',
         pathMatch: 'full'
       },
       {
-        path: 'manage-adm',
-        component: AdmManagerComponent
+        path: 'user-manager',
+        component: UserManagerComponent
       },
       {
         path: 'event-report',

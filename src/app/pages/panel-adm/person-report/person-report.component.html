@@ -42,7 +42,7 @@
   <ng-template pTemplate="body" let-person>
     <tr>
       <td>{{ person['pessoa']['id'] }}</td>
-      <td>{{ person['pessoa']['nome'] }}</td>
+      <td>{{ person['pessoa']['nome'] }} {{ person['pessoa']['sobrenome']}}</td>
       <td>{{ person['pessoa']['telefone'] | phoneNumber}}</td>
       <td>{{ person['pessoa']['dataNascimento'] | date:'dd/MM/yyyy'}}</td>
       <td>

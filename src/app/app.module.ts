@@ -23,11 +23,13 @@ import { HeaderComponent } from './components/header/header.component';
 import {NgOptimizedImage} from "@angular/common";
 import {AvatarModule} from "primeng/avatar";
 import { PanelAdmComponent } from './pages/panel-adm/panel-adm.component';
-import { AdmManagerComponent } from './pages/panel-adm/adm-manager/adm-manager.component';
+import { UserManagerComponent } from './pages/panel-adm/user-manager/user-manager.component';
 import {MenuModule} from "primeng/menu";
 import {SlideMenuModule} from "primeng/slidemenu";
 import {PanelMenuModule} from "primeng/panelmenu";
 import {SharedModule} from "./modules/shared.module";
+import {TableModule} from "primeng/table";
+import {PanelAdmModule} from "./pages/panel-adm/panel-adm.module";
 
 @NgModule({
   declarations: [
@@ -38,7 +40,7 @@ import {SharedModule} from "./modules/shared.module";
     HomeComponent,
     HeaderComponent,
     PanelAdmComponent,
-    AdmManagerComponent
+    UserManagerComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +61,9 @@ import {SharedModule} from "./modules/shared.module";
     MenuModule,
     SlideMenuModule,
     PanelMenuModule,
-    SharedModule
+    SharedModule,
+    TableModule,
+    PanelAdmModule
   ],
   providers: [
     UsuarioService,

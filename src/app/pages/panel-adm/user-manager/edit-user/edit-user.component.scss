@@ -1,0 +1,11 @@
+.input-label {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.input-row {
+  display:flex;
+  justify-content: space-between;
+  gap: 10px;
+}

@@ -1,0 +1,35 @@
+<p-dialog header="Header" [(visible)]="visible" [style]="{ width: 'fit-content' }" (onHide)="onCloseAction()">
+  <ng-template pTemplate="header">
+    <span class="text-xl font-bold">Edição do usuário {{ usuario.nome }}</span>
+  </ng-template>
+  <form [formGroup]="form">
+    <div class="input-row">
+      <div class="input-label">
+        <label>Nome</label>
+        <input pInputText placeholder="Nome" formControlName="name"
+               [class.invalid-input]="name?.invalid && name?.touched">
+      </div>
+
+      <div class="input-label">
+        <label>Email</label>
+        <input pInputText placeholder="Email" formControlName="email"
+               [class.invalid-input]="email?.invalid && email?.touched">
+      </div>
+    </div>
+    <div class="input-row" style="margin-top: 20px">
+      <div class="input-label">
+        <label>Tipo Usuário</label>
+        <p-dropdown
+          formControlName="userType"
+          [options]="tiposUsuarios"
+          optionLabel="nome"
+          optionValue="id"
+          appendTo="body"
+        ></p-dropdown>
+      </div>
+    </div>
+  </form>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="onConfirmAction()" label="Salvar" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>

@@ -8,11 +8,19 @@ import {SharedModule} from "../../modules/shared.module";
 import {InputTextModule} from "primeng/inputtext";
 import {InputNumberModule} from "primeng/inputnumber";
 import { PersonReportComponent } from './person-report/person-report.component';
+import { EditUserComponent } from './user-manager/edit-user/edit-user.component';
+import {DialogModule} from "primeng/dialog";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {DropdownModule} from "primeng/dropdown";
 
 @NgModule({
   declarations: [
     EventReportComponent,
-    PersonReportComponent
+    PersonReportComponent,
+    EditUserComponent
+  ],
+  exports: [
+    EditUserComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +29,11 @@ import { PersonReportComponent } from './person-report/person-report.component';
     ButtonModule,
     SharedModule,
     InputTextModule,
-    InputNumberModule
+    InputNumberModule,
+    DialogModule,
+    FormsModule,
+    ReactiveFormsModule,
+    DropdownModule
   ]
 })
 export class PanelAdmModule { }

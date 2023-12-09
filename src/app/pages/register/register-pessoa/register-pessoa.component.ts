@@ -88,7 +88,6 @@ export class RegisterPessoaComponent implements OnInit {
     this.usuarioService.register(this.usuario)
       .pipe(finalize((): void => this.usuario$?.unsubscribe()))
       .subscribe((usuario: Usuario): void => {
-        console.log(usuario);
         this.backToLogin();
       });
   }
