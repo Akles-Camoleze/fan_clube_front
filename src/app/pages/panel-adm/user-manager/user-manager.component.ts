@@ -3,6 +3,8 @@ import {Usuario} from "../../../entities/Usuario";
 import {UsuarioService} from "../../../services/usuario.service";
 import {finalize, Subscription} from "rxjs";
 import {MenuItem} from "primeng/api";
+import {TipoUsuario} from "../../../entities/TipoUsuario";
+import {TipoUsuarioService} from "../../../services/tipo-usuario.service";
 
 @Component({
   selector: 'app-user-manager',
@@ -16,16 +18,30 @@ export class UserManagerComponent implements OnInit {
   edit: boolean = false;
   selectedUser?: Usuario;
   selectedUserIndex: number = -1;
+  tiposUsuarios: TipoUsuario[] = [];
+  tiposUsuarios$!: Subscription;
 
-  constructor(private usuarioService: UsuarioService) {
+  constructor(
+    private usuarioService: UsuarioService,
+    private tipoUsuarioService: TipoUsuarioService
+  ) {
   }
 
   ngOnInit(): void {
+    this.getUsers();
+    this.setItems();
+  }
+
+  getUsers(): void {
     this.usuarios$ = this.usuarioService.getAll()
       .pipe(finalize((): void => this.usuarios$?.unsubscribe()))
       .subscribe((response: Usuario[]): void => {
         this.usuarios = response;
+        this.getUserTypes();
       });
+  }
+
+  setItems(): void {
     this.items = [
       {
         icon: 'pi pi-trash',
@@ -37,6 +53,14 @@ export class UserManagerComponent implements OnInit {
         command: (): void => this.showEdit()
       }
     ];
+  }
+
+  getUserTypes(): void {
+    this.tiposUsuarios$ = this.tipoUsuarioService.getAll()
+      .pipe(finalize((): void => this.tiposUsuarios$.unsubscribe()))
+      .subscribe((response: TipoUsuario[]): void => {
+        this.tiposUsuarios = response;
+      });
   }
 
   showEdit(value: boolean = true): void {
@@ -61,4 +85,5 @@ export class UserManagerComponent implements OnInit {
     this.selectedUser = usuario;
   }
 
+  protected readonly parseInt = parseInt;
 }

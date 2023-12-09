@@ -30,6 +30,12 @@
     </div>
   </form>
   <ng-template pTemplate="footer">
-    <p-button icon="pi pi-check" (click)="onConfirmAction()" label="Salvar" styleClass="p-button-text"></p-button>
+    <p-button
+      icon="pi pi-save"
+      [disabled]="form.invalid"
+      (click)="onConfirmAction()"
+      label="Salvar"
+      styleClass="button-blue">
+    </p-button>
   </ng-template>
 </p-dialog>

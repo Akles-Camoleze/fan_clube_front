@@ -11,7 +11,7 @@ import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {Interceptor} from "../utils/interceptor";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {UsuarioService} from "./services/usuario.service";
 import { RegisterComponent } from './pages/register/register.component';
 import {CalendarModule} from "primeng/calendar";
@@ -30,6 +30,8 @@ import {PanelMenuModule} from "primeng/panelmenu";
 import {SharedModule} from "./modules/shared.module";
 import {TableModule} from "primeng/table";
 import {PanelAdmModule} from "./pages/panel-adm/panel-adm.module";
+import {DropdownModule} from "primeng/dropdown";
+import {TagModule} from "primeng/tag";
 
 @NgModule({
   declarations: [
@@ -63,7 +65,10 @@ import {PanelAdmModule} from "./pages/panel-adm/panel-adm.module";
     PanelMenuModule,
     SharedModule,
     TableModule,
-    PanelAdmModule
+    PanelAdmModule,
+    DropdownModule,
+    TagModule,
+    FormsModule
   ],
   providers: [
     UsuarioService,

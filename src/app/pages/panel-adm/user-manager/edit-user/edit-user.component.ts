@@ -16,13 +16,9 @@ export class EditUserComponent implements OnChanges {
   @Output() onConfirm: EventEmitter<any> = new EventEmitter<any>();
   @Output() onClose: EventEmitter<any> = new EventEmitter<any>();
   form: FormGroup;
-  tiposUsuarios: TipoUsuario[] = [];
-  tiposUsuarios$!: Subscription;
+  @Input() tiposUsuarios: TipoUsuario[] = [];
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private tipoUsuarioService: TipoUsuarioService
-  ) {
+  constructor(private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -35,11 +31,6 @@ export class EditUserComponent implements OnChanges {
       this.name?.setValue(this.usuario.nome);
       this.email?.setValue(this.usuario.email);
       this.userType?.setValue(this.usuario.tipoUsuario.id);
-      this.tiposUsuarios$ = this.tipoUsuarioService.getAll()
-        .pipe(finalize((): void => this.tiposUsuarios$.unsubscribe()))
-        .subscribe((response: TipoUsuario[]): void => {
-          this.tiposUsuarios = response;
-        });
     }
   }
 
@@ -55,6 +46,7 @@ export class EditUserComponent implements OnChanges {
   }
 
   onConfirmAction(): void {
+    if (this.form.invalid) return;
     this.visible = false;
     this.buildUser();
     this.onConfirm.emit();
