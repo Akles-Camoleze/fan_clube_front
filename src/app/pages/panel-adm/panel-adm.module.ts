@@ -7,10 +7,12 @@ import {ButtonModule} from "primeng/button";
 import {SharedModule} from "../../modules/shared.module";
 import {InputTextModule} from "primeng/inputtext";
 import {InputNumberModule} from "primeng/inputnumber";
+import { PersonReportComponent } from './person-report/person-report.component';
 
 @NgModule({
   declarations: [
-    EventReportComponent
+    EventReportComponent,
+    PersonReportComponent
   ],
   imports: [
     CommonModule,

@@ -28,7 +28,6 @@ import {MenuModule} from "primeng/menu";
 import {SlideMenuModule} from "primeng/slidemenu";
 import {PanelMenuModule} from "primeng/panelmenu";
 import {SharedModule} from "./modules/shared.module";
-import { RealValuePipe } from './pipes/real-value.pipe';
 
 @NgModule({
   declarations: [

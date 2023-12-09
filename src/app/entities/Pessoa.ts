@@ -7,4 +7,5 @@ export class Pessoa {
   sobrenome!: string;
   endereco!: Endereco;
   dataNascimento!: Date;
+  readonly qtdInscricao!: number;
 }

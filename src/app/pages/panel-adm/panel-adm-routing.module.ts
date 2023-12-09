@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {AdmManagerComponent} from "./adm-manager/adm-manager.component";
 import {PanelAdmComponent} from "./panel-adm.component";
 import {EventReportComponent} from "./event-report/event-report.component";
+import {PersonReportComponent} from "./person-report/person-report.component";
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
       {
         path: 'event-report',
         component: EventReportComponent
+      },
+      {
+        path: 'person-report',
+        component: PersonReportComponent
       }
     ]
   },

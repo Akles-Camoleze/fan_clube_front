@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'date'
+  name: 'data'
 })
-export class DatePipe implements PipeTransform {
+export class DataPipe implements PipeTransform {
 
   transform(value: Date | string): {data: string, hora: string} {
     if (typeof value === 'string') {

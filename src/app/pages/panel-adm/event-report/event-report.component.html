@@ -24,13 +24,16 @@
   </ng-template>
   <ng-template pTemplate="header">
     <tr>
-      <th pSortableColumn="year" style="width:33%">
+      <th pSortableColumn="year" style="width:25%">
           Ano <p-sortIcon field="year"></p-sortIcon>
       </th>
-      <th pSortableColumn="month" style="width:33%">
+      <th pSortableColumn="month" style="width:25%">
         Mês <p-sortIcon field="month"></p-sortIcon>
       </th>
-      <th pSortableColumn="total" style="width:33%">
+      <th pSortableColumn="qtdEvento" style="width:25%">
+        Eventos <p-sortIcon field="qtdEvento"></p-sortIcon>
+      </th>
+      <th pSortableColumn="total" style="width:25%">
         Total <p-sortIcon field="total"></p-sortIcon>
       </th>
     </tr>
@@ -39,6 +42,7 @@
     <tr>
       <td>{{ report.year }}</td>
       <td>{{ report.month | monthName }}</td>
+      <td>{{ report['qtdEvento'] }}</td>
       <td>{{ report.total | realValue }}</td>
     </tr>
   </ng-template>

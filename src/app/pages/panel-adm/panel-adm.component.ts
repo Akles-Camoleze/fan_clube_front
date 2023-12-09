@@ -29,7 +29,8 @@ export class PanelAdmComponent implements OnInit {
           },
           {
             icon: 'pi pi-user',
-            label: 'Pessoas'
+            label: 'Pessoas',
+            command: () => this.router.navigateByUrl('/panel-adm/person-report')
           }
         ]
       }
