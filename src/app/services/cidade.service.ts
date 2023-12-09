@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {PATH_API} from "../../consts";
-import {Cidade} from "../models/Cidade";
+import {Cidade} from "../entities/Cidade";
 
 @Injectable({
   providedIn: 'root'

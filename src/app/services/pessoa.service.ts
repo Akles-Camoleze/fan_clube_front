@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Pessoa} from "../models/Pessoa";
+import {Pessoa} from "../entities/Pessoa";
 import {PATH_API} from "../../consts";
 
 @Injectable({

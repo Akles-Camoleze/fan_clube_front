@@ -21,7 +21,7 @@ export class HeaderComponent implements AfterViewInit, OnInit {
       },
       {
         icon: 'pi pi-users',
-        label: 'Gerenciar Adm.',
+        label: 'Painel Administrativo',
         command: () => this.router.navigate(['/panel-adm'])
       },
       {

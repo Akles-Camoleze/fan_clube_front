@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
 import {PATH_API} from "../../consts";
 import {HttpClient} from "@angular/common/http";
-import {Endereco} from "../models/Endereco";
+import {Endereco} from "../entities/Endereco";
 
 @Injectable({
   providedIn: 'root'

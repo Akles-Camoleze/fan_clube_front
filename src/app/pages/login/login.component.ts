@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UsuarioService} from "../../services/usuario.service";
 import {Router} from "@angular/router";
-import {Usuario} from "../../models/Usuario";
+import {Usuario} from "../../entities/Usuario";
 import {finalize, Subscription} from "rxjs";
 
 @Component({

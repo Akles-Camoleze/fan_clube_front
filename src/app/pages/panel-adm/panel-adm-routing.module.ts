@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {AdmManagerComponent} from "./adm-manager/adm-manager.component";
 import {PanelAdmComponent} from "./panel-adm.component";
+import {EventReportComponent} from "./event-report/event-report.component";
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
       {
         path: 'manage-adm',
         component: AdmManagerComponent
+      },
+      {
+        path: 'event-report',
+        component: EventReportComponent
       }
     ]
   },

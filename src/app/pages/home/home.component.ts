@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {EventoService} from "../../services/evento.service";
 import {Subscription, finalize} from "rxjs";
-import {Evento} from "../../models/Evento";
+import {Evento} from "../../entities/Evento";
 
 @Component({
   selector: 'app-home',

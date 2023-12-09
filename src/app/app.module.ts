@@ -22,12 +22,13 @@ import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import {NgOptimizedImage} from "@angular/common";
 import {AvatarModule} from "primeng/avatar";
-import { DatePipe } from './pipes/date.pipe';
 import { PanelAdmComponent } from './pages/panel-adm/panel-adm.component';
 import { AdmManagerComponent } from './pages/panel-adm/adm-manager/adm-manager.component';
 import {MenuModule} from "primeng/menu";
 import {SlideMenuModule} from "primeng/slidemenu";
 import {PanelMenuModule} from "primeng/panelmenu";
+import {SharedModule} from "./modules/shared.module";
+import { RealValuePipe } from './pipes/real-value.pipe';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,6 @@ import {PanelMenuModule} from "primeng/panelmenu";
     RegisterPessoaComponent,
     HomeComponent,
     HeaderComponent,
-    DatePipe,
     PanelAdmComponent,
     AdmManagerComponent
   ],
@@ -60,6 +60,7 @@ import {PanelMenuModule} from "primeng/panelmenu";
     MenuModule,
     SlideMenuModule,
     PanelMenuModule,
+    SharedModule
   ],
   providers: [
     UsuarioService,
@@ -69,6 +70,7 @@ import {PanelMenuModule} from "primeng/panelmenu";
       multi: true
     }
   ],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

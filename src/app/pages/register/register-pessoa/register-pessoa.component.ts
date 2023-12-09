@@ -2,15 +2,15 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {CustomValidators} from "../../../../utils/CustomValidators";
-import {Usuario} from "../../../models/Usuario";
+import {Usuario} from "../../../entities/Usuario";
 import {PessoaService} from "../../../services/pessoa.service";
 import {EnderecoService} from "../../../services/endereco.service";
 import {UsuarioService} from "../../../services/usuario.service";
-import {Endereco} from "../../../models/Endereco";
+import {Endereco} from "../../../entities/Endereco";
 import {Observable, Subject, switchMap, takeUntil} from "rxjs";
-import {Pessoa} from "../../../models/Pessoa";
-import {Cidade} from "../../../models/Cidade";
-import {TipoUsuario} from "../../../models/TipoUsuario";
+import {Pessoa} from "../../../entities/Pessoa";
+import {Cidade} from "../../../entities/Cidade";
+import {TipoUsuario} from "../../../entities/TipoUsuario";
 
 @Component({
   selector: 'app-register-pessoa',
