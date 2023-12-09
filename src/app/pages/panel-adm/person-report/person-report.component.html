@@ -8,39 +8,34 @@
   [tableStyle]="{ 'min-width': '50rem' }"
   currentPageReportTemplate="Exibindo {first} ao {last} de {totalRecords} elementos"
   [rowsPerPageOptions]="[10, 20, 30]"
-  [globalFilterFields]="['year']">
+  [globalFilterFields]="['pessoa.nome']">
   <ng-template pTemplate="caption">
     <div class="filters">
       <button pButton label="Limpar" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear()"></button>
       <span class="p-input-icon-right ml-auto">
         <i class="pi pi-search"></i>
-        <p-inputNumber
-          #input
-          [useGrouping]="false"
-          (onInput)="dt.filterGlobal(input.value, 'equals')" placeholder="Ano">
-        </p-inputNumber>
+        <input #input pInputText (input)="dt.filterGlobal(input.value, 'contains')" placeholder="Nome Pessoa"/>
+
       </span>
     </div>
   </ng-template>
   <ng-template pTemplate="header">
     <tr>
-      <th pSortableColumn="year" style="width:16%">
-        Id <p-sortIcon field="year"></p-sortIcon>
+      <th pSortableColumn="pessoa.id" style="width:16%">
+        Id <p-sortIcon field="pessoa.id"></p-sortIcon>
       </th>
-      <th pSortableColumn="month" style="width:16%">
-        Nome <p-sortIcon field="month"></p-sortIcon>
+      <th pSortableColumn="pessoa.nome" style="width:16%">
+        Nome <p-sortIcon field="pessoa.nome"></p-sortIcon>
       </th>
-      <th pSortableColumn="qtdEvento" style="width:16%">
-        Telefone <p-sortIcon field="qtdEvento"></p-sortIcon>
+      <th style="width:16%">Telefone></th>
+      <th pSortableColumn="pessoa.dataNascimento" style="width:16%">
+        Nascimento <p-sortIcon field="pessoa.dataNascimento"></p-sortIcon>
       </th>
-      <th pSortableColumn="total" style="width:16%">
-        Nascimento <p-sortIcon field="total"></p-sortIcon>
+      <th pSortableColumn="endereco.rua" style="width:20%">
+        Endereço <p-sortIcon field="endereco.rua"></p-sortIcon>
       </th>
-      <th pSortableColumn="total" style="width:20%">
-        Endereço <p-sortIcon field="total"></p-sortIcon>
-      </th>
-      <th pSortableColumn="total" style="width:16%">
-        Inscrições <p-sortIcon field="total"></p-sortIcon>
+      <th pSortableColumn="qtdInscricao" style="width:16%">
+        Inscrições <p-sortIcon field="qtdInscricao"></p-sortIcon>
       </th>
     </tr>
   </ng-template>
