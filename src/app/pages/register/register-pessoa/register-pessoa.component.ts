@@ -3,11 +3,9 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {CustomValidators} from "../../../../utils/CustomValidators";
 import {Usuario} from "../../../entities/Usuario";
-import {PessoaService} from "../../../services/pessoa.service";
-import {EnderecoService} from "../../../services/endereco.service";
 import {UsuarioService} from "../../../services/usuario.service";
 import {Endereco} from "../../../entities/Endereco";
-import {Observable, Subject, switchMap, takeUntil} from "rxjs";
+import {finalize, Subscription} from "rxjs";
 import {Pessoa} from "../../../entities/Pessoa";
 import {Cidade} from "../../../entities/Cidade";
 import {TipoUsuario} from "../../../entities/TipoUsuario";
@@ -20,13 +18,11 @@ import {TipoUsuario} from "../../../entities/TipoUsuario";
 export class RegisterPessoaComponent implements OnInit {
   form: FormGroup;
   usuario!: Usuario;
-  private destroy$: Subject<void> = new Subject<void>();
+  private usuario$?: Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private pessoaService: PessoaService,
-    private enderecoService: EnderecoService,
     private usuarioService: UsuarioService
   ) {
     this.form = this.formBuilder.group({
@@ -88,6 +84,33 @@ export class RegisterPessoaComponent implements OnInit {
 
   enter(): void {
     if (this.form.invalid) return;
+    this.buildUser();
+    this.usuarioService.register(this.usuario)
+      .pipe(finalize((): void => this.usuario$?.unsubscribe()))
+      .subscribe((usuario: Usuario): void => {
+        console.log(usuario);
+        this.backToLogin();
+      });
+  }
+
+  buildUser(): void {
+    const tipoUsuario: TipoUsuario = new TipoUsuario();
+    tipoUsuario.id = 2;
+    this.usuario.pessoa = this.buildPessoa();
+    this.usuario.tipoUsuario = tipoUsuario;
+  }
+
+  buildPessoa(): Pessoa {
+    const pessoa: Pessoa = new Pessoa();
+    pessoa.dataNascimento = this.birthdate?.value;
+    pessoa.nome = this.name?.value;
+    pessoa.sobrenome = this.lastname?.value;
+    pessoa.telefone = this.phone?.value;
+    pessoa.endereco = this.buildEndereco();
+    return pessoa;
+  }
+
+  buildEndereco(): Endereco {
     const endereco: Endereco = new Endereco();
     const cidade: Cidade = new Cidade();
     cidade.id = 1;
@@ -96,35 +119,7 @@ export class RegisterPessoaComponent implements OnInit {
     endereco.bairro = this.district?.value;
     endereco.bairro = this.district?.value;
     endereco.cidade = cidade;
-
-    this.enderecoService.register(endereco).pipe(
-        takeUntil(this.destroy$),
-        switchMap((endereco: Endereco) => this.registerPerson(endereco))
-      ).pipe(
-        takeUntil(this.destroy$),
-        switchMap((pessoa: Pessoa) => this.registerUser(pessoa))
-      ).subscribe((): void => {
-        this.backToLogin();
-      });
-  }
-
-  registerPerson(endereco: Endereco): Observable<any> {
-    console.log(this.phone?.value);
-    const pessoa: Pessoa = new Pessoa();
-    pessoa.dataNascimento = this.birthdate?.value;
-    pessoa.nome = this.name?.value;
-    pessoa.sobrenome = this.lastname?.value;
-    pessoa.telefone = this.phone?.value;
-    pessoa.endereco = endereco;
-    return this.pessoaService.register(pessoa);
-  }
-
-  registerUser(pessoa: Pessoa): Observable<any> {
-    const tipoUsuario: TipoUsuario = new TipoUsuario();
-    tipoUsuario.id = 2;
-    this.usuario.pessoa = pessoa;
-    this.usuario.tipoUsuario = tipoUsuario;
-    return this.usuarioService.register(this.usuario);
+    return endereco;
   }
 
   backToUserRegister(): void {
