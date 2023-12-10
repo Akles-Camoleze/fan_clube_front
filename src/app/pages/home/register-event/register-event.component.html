@@ -1,0 +1,86 @@
+<p-dialog header="Header" [(visible)]="visible" [style]="{ width: 'fit-content' }" (onHide)="onCloseAction()">
+  <ng-template pTemplate="header">
+    <span style="font-size: 20px; font-weight: bold">Novo Evento</span>
+  </ng-template>
+  <form [formGroup]="form">
+    <div>
+      <div class="input-row">
+        <div class="input-label">
+          <label>Nome</label>
+          <input pInputText placeholder="Nome" formControlName="name"
+                 [class.invalid-input]="name?.invalid && name?.touched">
+        </div>
+
+        <div class="input-label">
+          <label>Capacidade</label>
+          <p-inputNumber formControlName="capacity" [useGrouping]="false" placeholder="Ex.: 100"></p-inputNumber>
+        </div>
+
+        <div class="input-label">
+          <label>Valor</label>
+          <p-inputNumber formControlName="value" [maxFractionDigits]="2" placeholder="Ex.: 95,50"></p-inputNumber>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="input-row">
+        <div class="input-label">
+          <label>Data</label>
+          <p-calendar
+            appendTo="body"
+            placeholder="XX/XX/XXXX"
+            formControlName="date"
+            [class.invalid-input]="date?.invalid && date?.touched">
+          </p-calendar>
+        </div>
+      </div>
+    </div>
+
+    <p-divider>Endereço</p-divider>
+
+    <div>
+      <div class="input-row" style="margin-top: 20px">
+        <div class="input-label" style="width: 90% !important">
+          <label>Rua</label>
+          <input pInputText placeholder="Av. Fulano Ciclano" formControlName="street"
+                 [class.invalid-input]="street?.invalid && street?.touched">
+        </div>
+
+        <div class="input-label">
+          <label>Número</label>
+          <p-inputNumber formControlName="number" [useGrouping]="false" placeholder="Ex.: 105"></p-inputNumber>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="input-row">
+        <div class="input-label">
+          <label>Bairro</label>
+          <input pInputText placeholder="Beltrano" formControlName="district"
+                 [class.invalid-input]="district?.invalid && district?.touched">
+        </div>
+        <div class="input-label">
+          <label>Cidade</label>
+          <input pInputText placeholder="Americana" formControlName="city"
+                 [class.invalid-input]="city?.invalid && city?.touched">
+        </div>
+        <div class="input-label">
+          <label>UF</label>
+          <input pInputText placeholder="MG" formControlName="uf"
+                 [class.invalid-input]="uf?.invalid && uf?.touched">
+        </div>
+      </div>
+    </div>
+  </form>
+  <ng-template pTemplate="footer">
+    <p-button
+      icon="pi pi-save"
+      [disabled]="form.invalid"
+      (click)="onConfirmAction()"
+      label="Salvar"
+      styleClass="button-blue">
+    </p-button>
+  </ng-template>
+</p-dialog>

@@ -42,7 +42,9 @@
 <div id="position-button">
   <p-button
     icon="pi pi-plus"
-    styleClass="p-button-rounded p-button-raised button-blue">
+    styleClass="p-button-rounded p-button-raised button-blue"
+    (onClick)="showRegister()">
   </p-button>
 </div>
 
+<app-register-event [visible]="registerEvento" (onClose)="showRegister(false)"></app-register-event>

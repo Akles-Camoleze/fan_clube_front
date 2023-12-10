@@ -32,6 +32,9 @@ import {TableModule} from "primeng/table";
 import {PanelAdmModule} from "./pages/panel-adm/panel-adm.module";
 import {DropdownModule} from "primeng/dropdown";
 import {TagModule} from "primeng/tag";
+import { RegisterEventComponent } from './pages/home/register-event/register-event.component';
+import {DialogModule} from "primeng/dialog";
+import {DividerModule} from "primeng/divider";
 
 @NgModule({
   declarations: [
@@ -42,7 +45,8 @@ import {TagModule} from "primeng/tag";
     HomeComponent,
     HeaderComponent,
     PanelAdmComponent,
-    UserManagerComponent
+    UserManagerComponent,
+    RegisterEventComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +72,9 @@ import {TagModule} from "primeng/tag";
     PanelAdmModule,
     DropdownModule,
     TagModule,
-    FormsModule
+    FormsModule,
+    DialogModule,
+    DividerModule
   ],
   providers: [
     UsuarioService,

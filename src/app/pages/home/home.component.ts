@@ -11,6 +11,7 @@ import {Evento} from "../../entities/Evento";
 export class HomeComponent implements OnInit {
   eventos: Evento[] = [];
   eventos$?: Subscription;
+  registerEvento: boolean = false;
 
   constructor(private eventoService: EventoService) {
   }
@@ -24,5 +25,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-
+  showRegister(value: boolean = true): void {
+    this.registerEvento = value;
+  }
 }
