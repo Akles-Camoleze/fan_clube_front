@@ -31,11 +31,27 @@
             appendTo="body"
             placeholder="XX/XX/XXXX"
             formControlName="date"
+            [showTime]="true"
             [class.invalid-input]="date?.invalid && date?.touched">
           </p-calendar>
         </div>
       </div>
     </div>
+    <div>
+      <div class="input-row">
+        <div class="input-label" style="width: 100%">
+          <label>Data</label>
+          <textarea
+            style="resize: none"
+            pInputTextarea
+            placeholder="Descrição"
+            formControlName="description"
+            [class.invalid-input]="description?.invalid && description?.touched">
+          </textarea>
+        </div>
+      </div>
+    </div>
+
 
     <p-divider>Endereço</p-divider>
 

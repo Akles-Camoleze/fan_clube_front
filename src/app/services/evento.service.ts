@@ -17,6 +17,10 @@ export class EventoService {
     return this.http.get<Evento[]>(`${PATH_API}/event/all`);
   }
 
+  public register(evento: Evento): Observable<Evento> {
+    return this.http.post<Evento>(`${PATH_API}/event/register`, evento);
+  }
+
   public getSubscriptionReport(year?: number): Observable<EventoReportModel[]> {
     let url: string = `${PATH_API}/event/subscription-report`;
     if (year) {

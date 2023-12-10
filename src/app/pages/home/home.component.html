@@ -47,4 +47,8 @@
   </p-button>
 </div>
 
-<app-register-event [visible]="registerEvento" (onClose)="showRegister(false)"></app-register-event>
+<app-register-event
+  [visible]="registerEvento"
+  (onClose)="showRegister(false)"
+  (onConfirm)="createEvento($event)">
+</app-register-event>

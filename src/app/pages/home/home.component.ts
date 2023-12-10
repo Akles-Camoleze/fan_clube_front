@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
   eventos: Evento[] = [];
   eventos$?: Subscription;
   registerEvento: boolean = false;
+  registerEvento$?: Subscription;
 
   constructor(private eventoService: EventoService) {
   }
@@ -27,5 +28,13 @@ export class HomeComponent implements OnInit {
 
   showRegister(value: boolean = true): void {
     this.registerEvento = value;
+  }
+
+  createEvento(evento: Evento): void {
+    this.registerEvento$ = this.eventoService.register(evento)
+      .pipe(finalize((): void => this.registerEvento$?.unsubscribe()))
+      .subscribe((response: Evento): void => {
+        this.eventos.push(response);
+      });
   }
 }

@@ -35,6 +35,7 @@ import {TagModule} from "primeng/tag";
 import { RegisterEventComponent } from './pages/home/register-event/register-event.component';
 import {DialogModule} from "primeng/dialog";
 import {DividerModule} from "primeng/divider";
+import {InputTextareaModule} from "primeng/inputtextarea";
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import {DividerModule} from "primeng/divider";
     TagModule,
     FormsModule,
     DialogModule,
-    DividerModule
+    DividerModule,
+    InputTextareaModule
   ],
   providers: [
     UsuarioService,

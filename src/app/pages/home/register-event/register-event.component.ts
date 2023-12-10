@@ -14,7 +14,7 @@ import {Cidade} from "../../../entities/Cidade";
 })
 export class RegisterEventComponent {
   @Input() visible: boolean = false;
-  @Output() onConfirm: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onConfirm: EventEmitter<Evento> = new EventEmitter<Evento>();
   @Output() onClose: EventEmitter<any> = new EventEmitter<any>();
   form: FormGroup;
 
@@ -23,7 +23,7 @@ export class RegisterEventComponent {
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
       capacity: new FormControl('', [Validators.required]),
       date: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required]),
+      description: new FormControl(''),
       value: new FormControl('', [Validators.required]),
       street: new FormControl('', [Validators.required]),
       number: new FormControl('', [Validators.required]),
@@ -34,7 +34,7 @@ export class RegisterEventComponent {
     });
   }
 
-  buildForm(): void {
+  buildForm(): Evento {
     const evento: Evento = new Evento();
     evento.nome = this.name?.value;
     evento.capacidade = this.capacity?.value;
@@ -45,6 +45,7 @@ export class RegisterEventComponent {
     evento.arquivo = new Arquivo();
     evento.arquivo.caminho = this.file?.value;
     this.buildAddress(evento);
+    return evento;
   }
 
   buildAddress(evento: Evento): void {
@@ -54,8 +55,7 @@ export class RegisterEventComponent {
     evento.endereco.bairro =  this.district?.value;
 
     evento.endereco.cidade = new Cidade();
-    evento.endereco.cidade.nome = this.city?.value;
-    evento.endereco.cidade.uf = this.uf?.value;
+    evento.endereco.cidade.id = 1;
   }
 
   onCloseAction(): void {
@@ -66,8 +66,7 @@ export class RegisterEventComponent {
   onConfirmAction(): void {
     if (this.form.invalid) return;
     this.visible = false;
-    this.buildForm();
-    this.onConfirm.emit();
+    this.onConfirm.emit(this.buildForm());
   }
 
   get name() {
