@@ -21,6 +21,10 @@ export class EventoService {
     return this.http.post<Evento>(`${PATH_API}/event/register`, evento);
   }
 
+  public delete(idEvento: number): Observable<any> {
+    return this.http.delete(`${PATH_API}/event/${idEvento}`);
+  }
+
   public getSubscriptionReport(year?: number): Observable<EventoReportModel[]> {
     let url: string = `${PATH_API}/event/subscription-report`;
     if (year) {

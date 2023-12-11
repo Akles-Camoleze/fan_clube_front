@@ -23,6 +23,8 @@ export class HomeComponent implements OnInit {
   confirmationDialog: boolean = false;
   selectedEvento?: Evento;
   loading: boolean = false;
+  message: string = "";
+  action: () => void = (): void => {};
 
   constructor(
     private eventoService: EventoService,
@@ -82,8 +84,10 @@ export class HomeComponent implements OnInit {
       })
   }
 
-  selectEvento(evento: Evento): void {
+  selectEvento(evento: Evento, message: string, action: () => void): void {
     this.selectedEvento = evento;
+    this.message = message;
+    this.action = action;
     this.showConfirmation();
   }
 
@@ -115,4 +119,19 @@ export class HomeComponent implements OnInit {
   showConfirmation(value: boolean = true): void {
     this.confirmationDialog = value;
   }
+
+  deleteEvento(): void {
+    this.destroy$ = this.eventoService.delete(this.selectedEvento!.id)
+      .pipe(finalize((): void => this.destroy$?.unsubscribe()))
+      .subscribe((): void => {
+        this.eventos.find((env: Evento, index: number): boolean => {
+          if (env.id === this.selectedEvento?.id) {
+            this.eventos.splice(index, 1);
+            return true;
+          }
+          return false;
+        })
+      })
+  }
+
 }

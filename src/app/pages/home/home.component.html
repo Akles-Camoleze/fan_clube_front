@@ -5,7 +5,7 @@
   <p-progressSpinner></p-progressSpinner>
 </div>
 <div *ngIf="!loading" id="grid">
-  <p-card *ngFor="let evento of eventos" [header]="evento.nome" [style]="{ width: '360px' }">
+  <p-card *ngFor="let evento of eventos; index as i" [header]="evento.nome" [style]="{ width: '360px' }">
     <ng-template pTemplate="header">
       <div style="width: 360px; height: 130px">
         <img
@@ -31,21 +31,28 @@
       <p>{{ evento.descricao }}</p>
     </ng-template>
     <ng-template pTemplate="footer">
-      <div style="width: 100%">
+      <div class="buttons">
         <p-button
           *ngIf="!verifySubscription(evento); else uns"
           label="Inscrever-se"
           icon="pi pi-calendar-plus"
           styleClass="p-button-raised button-blue"
-          (onClick)="selectEvento(evento)">
+          (onClick)="selectEvento(evento, 'Deseja confirmar sua inscrição?', subscribe)">
+        </p-button>
+
+        <p-button
+          *ngIf="isAdmin()"
+          icon="pi pi-trash"
+          styleClass="p-button-raised p-button-rounded p-button-danger"
+          (onClick)="selectEvento(evento, 'Deseja excluir o evento?', deleteEvento)">
         </p-button>
 
         <ng-template #uns>
           <p-button
             label="Desinscrever-se"
             icon="pi pi-calendar-minus"
-            styleClass="p-button-raised p-button-danger"
-            (onClick)="selectEvento(evento)">
+            styleClass="p-button-raised p-button-warning"
+            (onClick)="selectEvento(evento, 'Deseja desinscrever-se do evento?', unsubscribe)">
           </p-button>
         </ng-template>
 
@@ -65,9 +72,9 @@
 <app-dialog-confirmation
   *ngIf="selectedEvento"
   [visible]="confirmationDialog"
-  (onConfirm)="!verifySubscription(selectedEvento) ? subscribe() : unsubscribe()"
+  (onConfirm)="action()"
   (onClose)="showConfirmation(false)">
-  <p>Deseja {{!verifySubscription(selectedEvento!) ? 'inscrever-se' : 'desinscrever-se'}} no evento?</p>
+  <p>{{message}}</p>
 </app-dialog-confirmation>
 
 <app-register-event
