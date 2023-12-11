@@ -33,7 +33,8 @@
           *ngIf="!verifySubscription(evento); else unsubscribe"
           label="Inscrever-se"
           icon="pi pi-calendar-plus"
-          styleClass="p-button-raised button-blue">
+          styleClass="p-button-raised button-blue"
+          (onClick)="subscribe(evento)">
         </p-button>
 
         <ng-template #unsubscribe>
@@ -49,7 +50,7 @@
   </p-card>
 </div>
 
-<div id="position-button">
+<div *ngIf="isAdmin()" id="position-button">
   <p-button
     icon="pi pi-plus"
     styleClass="p-button-rounded p-button-raised button-blue"
@@ -58,6 +59,7 @@
 </div>
 
 <app-register-event
+  *ngIf="isAdmin()"
   [visible]="registerEvento"
   (onClose)="showRegister(false)"
   (onConfirm)="createEvento($event)">

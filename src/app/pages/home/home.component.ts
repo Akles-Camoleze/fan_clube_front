@@ -4,6 +4,9 @@ import {Subscription, finalize} from "rxjs";
 import {Evento} from "../../entities/Evento";
 import {InscricaoService} from "../../services/inscricao.service";
 import {Inscricao} from "../../entities/Inscricao";
+import {Usuario} from "../../entities/Usuario";
+import {StateService} from "../../services/state.service";
+import {AdminService} from "../../services/admin.service";
 
 @Component({
   selector: 'app-home',
@@ -16,14 +19,18 @@ export class HomeComponent implements OnInit {
   inscricoes: Inscricao[] = [];
   registerEvento: boolean = false;
   destroy$?: Subscription;
+  usuarioLogged!: Usuario;
 
   constructor(
     private eventoService: EventoService,
-    private inscricaoService: InscricaoService
+    private inscricaoService: InscricaoService,
+    private stateService: StateService,
+    private adminService: AdminService
   ) {
   }
 
   ngOnInit(): void {
+    this.usuarioLogged = this.stateService.getItem<Usuario>('user')!;
     this.getEventos();
   }
 
@@ -37,7 +44,7 @@ export class HomeComponent implements OnInit {
   }
 
   getUsuarioIncricoes(): void {
-    this.destroy$ = this.inscricaoService.findAllByUsuario(1).pipe(
+    this.destroy$ = this.inscricaoService.findAllByUsuario(this.usuarioLogged.id).pipe(
       finalize((): void => this.destroy$?.unsubscribe())
     ).subscribe((response: Inscricao[]): void => {
       this.inscricoes = response;
@@ -58,7 +65,10 @@ export class HomeComponent implements OnInit {
   }
 
   subscribe(evento: Evento): void {
-    this.destroy$ = this.inscricaoService.register(new Inscricao())
+    const inscricao: Inscricao = new Inscricao();
+    inscricao.evento = evento;
+    inscricao.usuario = this.usuarioLogged;
+    this.destroy$ = this.inscricaoService.register(inscricao)
       .subscribe((response: Inscricao): void => {
         this.inscricoes.push(response);
       })
@@ -66,5 +76,9 @@ export class HomeComponent implements OnInit {
 
   verifySubscription(evento: Evento): boolean {
     return this.inscricoes.find((inscricao: Inscricao): boolean => inscricao.evento.id === evento.id) != undefined;
+  }
+
+  isAdmin(): boolean {
+    return this.adminService.isAdmin();
   }
 }

@@ -5,6 +5,7 @@ import {RegisterComponent} from "./pages/register/register.component";
 import {RegisterPessoaComponent} from "./pages/register/register-pessoa/register-pessoa.component";
 import {HomeComponent} from "./pages/home/home.component";
 import {AuthGuard} from "./services/auth.service";
+import {AdminGuard} from "./services/admin.service";
 
 const routes: Routes = [
   {
@@ -42,7 +43,7 @@ const routes: Routes = [
   {
     path: 'panel-adm',
     loadChildren: () => import('./pages/panel-adm/panel-adm.module').then(m => m.PanelAdmModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, AdminGuard]
   }
 ];
 

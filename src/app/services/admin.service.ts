@@ -7,7 +7,7 @@ import {ToastrService} from "ngx-toastr";
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AdminService {
 
   constructor(
     private router: Router,
@@ -17,21 +17,22 @@ export class AuthService {
   }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (this.isLoggedIn()) {
+    if (this.isAdmin()) {
       return true;
     } else {
-      this.router.navigate(['/login']).then((): void => {
-        this.toastr.error('É necessário estar logado para prosseguir.', 'Erro');
+      this.router.navigate(['/home']).then((): void => {
+        this.toastr.error('É necessário ser administrador para prosseguir.', 'Erro');
       });
       return false;
     }
   }
 
-  isLoggedIn(): boolean {
-    return this.stateService.getItem<Usuario>('user') !== null;
+  isAdmin(): boolean {
+    const usuario: Usuario | null = this.stateService.getItem<Usuario>('user');
+    return usuario !== null && usuario.tipoUsuario.nome === "Administrador";
   }
 }
 
-export const AuthGuard: CanActivateFn = (next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean => {
-  return inject(AuthService).canActivate(next, state);
+export const AdminGuard: CanActivateFn = (next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean => {
+  return inject(AdminService).canActivate(next, state);
 }
