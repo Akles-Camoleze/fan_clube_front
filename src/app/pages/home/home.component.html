@@ -40,12 +40,15 @@
           (onClick)="selectEvento(evento, 'Deseja confirmar sua inscrição?', subscribe)">
         </p-button>
 
-        <p-button
+        <p-splitButton
           *ngIf="isAdmin()"
-          icon="pi pi-trash"
-          styleClass="p-button-raised p-button-rounded p-button-danger"
-          (onClick)="selectEvento(evento, 'Deseja excluir o evento?', deleteEvento)">
-        </p-button>
+          icon="pi pi-pencil"
+          styleClass="p-button-raised p-button-text"
+          appendTo="body"
+          [model]="items"
+          (onClick)="selectEvento(evento, 'Deseja editar o evento?', editEvento)"
+          (onDropdownClick)="selectEventoOnly(evento)">
+        </p-splitButton>
 
         <ng-template #uns>
           <p-button

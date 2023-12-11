@@ -7,6 +7,7 @@ import {Inscricao} from "../../entities/Inscricao";
 import {Usuario} from "../../entities/Usuario";
 import {StateService} from "../../services/state.service";
 import {AdminService} from "../../services/admin.service";
+import {MenuItem} from "primeng/api";
 
 @Component({
   selector: 'app-home',
@@ -25,6 +26,7 @@ export class HomeComponent implements OnInit {
   loading: boolean = false;
   message: string = "";
   action: () => void = (): void => {};
+  items: MenuItem[] = [];
 
   constructor(
     private eventoService: EventoService,
@@ -37,6 +39,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.usuarioLogged = this.stateService.getItem<Usuario>('user')!;
     this.getEventos();
+    this.setItems();
   }
 
   getEventos(): void {
@@ -47,6 +50,16 @@ export class HomeComponent implements OnInit {
       this.eventos = eventos;
       this.getUsuarioIncricoes();
     });
+  }
+
+  setItems(): void {
+    this.items = [
+      {
+        icon: 'pi pi-trash',
+        label: 'Excluir',
+        command: (): void => this.selectMetaData('Deseja excluir o evento?', this.deleteEvento)
+      }
+    ];
   }
 
   getUsuarioIncricoes(): void {
@@ -85,11 +98,20 @@ export class HomeComponent implements OnInit {
   }
 
   selectEvento(evento: Evento, message: string, action: () => void): void {
+    this.selectEventoOnly(evento);
+    this.selectMetaData(message, action);
+  }
+
+  selectEventoOnly(evento: Evento): void {
     this.selectedEvento = evento;
+  }
+
+  private selectMetaData(message: string, action: () => void): void {
     this.message = message;
     this.action = action;
     this.showConfirmation();
   }
+
 
   unsubscribe(): void {
     let i: number;
@@ -132,6 +154,10 @@ export class HomeComponent implements OnInit {
           return false;
         })
       })
+  }
+
+  editEvento(): void {
+    console.log("editar");
   }
 
 }
