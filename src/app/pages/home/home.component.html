@@ -20,8 +20,8 @@
         {{ evento.endereco.cidade.nome }} - {{ evento.endereco.cidade.uf }}
       </span>
       <div id="data" *ngIf="(evento.data | data) as data">
-        <span><i class="pi pi-calendar"></i> {{data.data}} </span>
-        <span><i class="pi pi-clock"></i> {{data.hora}}  </span>
+        <span><i class="pi pi-calendar"></i> {{ data.data }} </span>
+        <span><i class="pi pi-clock"></i> {{ data.hora }}  </span>
       </div>
     </ng-template>
     <ng-template pTemplate="content">
@@ -42,7 +42,7 @@
             label="Desinscrever-se"
             icon="pi pi-calendar-minus"
             styleClass="p-button-raised p-button-danger"
-            (onClick)="unsubscribe(evento)">
+            (onClick)="selectEvento(evento)">
           </p-button>
         </ng-template>
 
@@ -58,6 +58,13 @@
     (onClick)="showRegister()">
   </p-button>
 </div>
+
+<app-dialog-confirmation
+  [visible]="confirmationDialog"
+  (onConfirm)="unsubscribe()"
+  (onClose)="showConfirmation(false)">
+  <p>Realmente deseja se desinscrever do evento?</p>
+</app-dialog-confirmation>
 
 <app-register-event
   *ngIf="isAdmin()"

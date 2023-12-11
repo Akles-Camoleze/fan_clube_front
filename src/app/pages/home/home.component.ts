@@ -20,6 +20,8 @@ export class HomeComponent implements OnInit {
   registerEvento: boolean = false;
   destroy$?: Subscription;
   usuarioLogged!: Usuario;
+  confirmationDialog: boolean = false;
+  selectedEvento?: Evento;
 
   constructor(
     private eventoService: EventoService,
@@ -75,10 +77,15 @@ export class HomeComponent implements OnInit {
       })
   }
 
-  unsubscribe(evento: Evento): void {
+  selectEvento(evento: Evento): void {
+    this.selectedEvento = evento;
+    this.showConfirmation();
+  }
+
+  unsubscribe(): void {
     let i: number;
     const inscricao: Inscricao = this.inscricoes.find((ins: Inscricao, index: number): boolean => {
-      if (ins.evento.id === evento.id) {
+      if (ins.evento.id === this.selectedEvento?.id) {
         i = index;
         return true;
       }
@@ -98,5 +105,9 @@ export class HomeComponent implements OnInit {
 
   isAdmin(): boolean {
     return this.adminService.isAdmin();
+  }
+
+  showConfirmation(value: boolean = true): void {
+    this.confirmationDialog = value;
   }
 }
