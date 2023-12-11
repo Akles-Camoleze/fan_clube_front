@@ -30,18 +30,19 @@
     <ng-template pTemplate="footer">
       <div style="width: 100%">
         <p-button
-          *ngIf="!verifySubscription(evento); else unsubscribe"
+          *ngIf="!verifySubscription(evento); else uns"
           label="Inscrever-se"
           icon="pi pi-calendar-plus"
           styleClass="p-button-raised button-blue"
           (onClick)="subscribe(evento)">
         </p-button>
 
-        <ng-template #unsubscribe>
+        <ng-template #uns>
           <p-button
             label="Desinscrever-se"
             icon="pi pi-calendar-minus"
-            styleClass="p-button-raised p-button-danger">
+            styleClass="p-button-raised p-button-danger"
+            (onClick)="unsubscribe(evento)">
           </p-button>
         </ng-template>
 

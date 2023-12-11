@@ -69,8 +69,26 @@ export class HomeComponent implements OnInit {
     inscricao.evento = evento;
     inscricao.usuario = this.usuarioLogged;
     this.destroy$ = this.inscricaoService.register(inscricao)
+      .pipe(finalize((): void => this.destroy$?.unsubscribe()))
       .subscribe((response: Inscricao): void => {
         this.inscricoes.push(response);
+      })
+  }
+
+  unsubscribe(evento: Evento): void {
+    let i: number;
+    const inscricao: Inscricao = this.inscricoes.find((ins: Inscricao, index: number): boolean => {
+      if (ins.evento.id === evento.id) {
+        i = index;
+        return true;
+      }
+      return false;
+    })!;
+
+    this.destroy$ = this.inscricaoService.delete(inscricao.id)
+      .pipe(finalize((): void => this.destroy$?.unsubscribe()))
+      .subscribe((): void => {
+        this.inscricoes.splice(i, 1);
       })
   }
 

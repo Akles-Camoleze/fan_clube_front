@@ -16,7 +16,11 @@ export class InscricaoService {
     return this.http.post<Inscricao>(`${PATH_API}/subscription/register`, inscricao);
   }
 
-  public findAllByUsuario(idUsuario: number): Observable<Inscricao[]> {
-    return this.http.get<Inscricao[]>(`${PATH_API}/subscription/all/${idUsuario}`);
+  public findAllByUsuario(idInscricao: number): Observable<Inscricao[]> {
+    return this.http.get<Inscricao[]>(`${PATH_API}/subscription/all/${idInscricao}`);
+  }
+
+  public delete(idInscricao: number): Observable<any> {
+     return this.http.delete(`${PATH_API}/subscription/${idInscricao}`);
   }
 }
