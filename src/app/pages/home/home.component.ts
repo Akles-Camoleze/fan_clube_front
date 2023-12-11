@@ -14,9 +14,8 @@ export class HomeComponent implements OnInit {
   eventos: Evento[] = [];
   eventos$?: Subscription;
   inscricoes: Inscricao[] = [];
-  inscricoes$?: Subscription;
   registerEvento: boolean = false;
-  registerEvento$?: Subscription;
+  destroy$?: Subscription;
 
   constructor(
     private eventoService: EventoService,
@@ -38,8 +37,8 @@ export class HomeComponent implements OnInit {
   }
 
   getUsuarioIncricoes(): void {
-    this.inscricoes$ = this.inscricaoService.findAllByUsuario(1).pipe(
-      finalize((): void => this.inscricoes$?.unsubscribe())
+    this.destroy$ = this.inscricaoService.findAllByUsuario(1).pipe(
+      finalize((): void => this.destroy$?.unsubscribe())
     ).subscribe((response: Inscricao[]): void => {
       this.inscricoes = response;
       console.log(this.inscricoes);
@@ -51,10 +50,21 @@ export class HomeComponent implements OnInit {
   }
 
   createEvento(evento: Evento): void {
-    this.registerEvento$ = this.eventoService.register(evento)
-      .pipe(finalize((): void => this.registerEvento$?.unsubscribe()))
+    this.destroy$ = this.eventoService.register(evento)
+      .pipe(finalize((): void => this.destroy$?.unsubscribe()))
       .subscribe((response: Evento): void => {
         this.eventos.push(response);
       });
+  }
+
+  subscribe(evento: Evento): void {
+    this.destroy$ = this.inscricaoService.register(new Inscricao())
+      .subscribe((response: Inscricao): void => {
+        this.inscricoes.push(response);
+      })
+  }
+
+  verifySubscription(evento: Evento): boolean {
+    return this.inscricoes.find((inscricao: Inscricao): boolean => inscricao.evento.id === evento.id) != undefined;
   }
 }

@@ -4,6 +4,7 @@ import {LoginComponent} from "./pages/login/login.component";
 import {RegisterComponent} from "./pages/register/register.component";
 import {RegisterPessoaComponent} from "./pages/register/register-pessoa/register-pessoa.component";
 import {HomeComponent} from "./pages/home/home.component";
+import {AuthGuard} from "./services/auth.service";
 
 const routes: Routes = [
   {
@@ -35,11 +36,13 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'panel-adm',
-    loadChildren: () => import('./pages/panel-adm/panel-adm.module').then(m => m.PanelAdmModule)
+    loadChildren: () => import('./pages/panel-adm/panel-adm.module').then(m => m.PanelAdmModule),
+    canActivate: [AuthGuard]
   }
 ];
 

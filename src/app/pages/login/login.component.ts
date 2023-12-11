@@ -4,6 +4,7 @@ import {UsuarioService} from "../../services/usuario.service";
 import {Router} from "@angular/router";
 import {Usuario} from "../../entities/Usuario";
 import {finalize, Subscription} from "rxjs";
+import {StateService} from "../../services/state.service";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private usuarioService: UsuarioService,
-    private router: Router
+    private router: Router,
+    private stateService: StateService
   ) {
     this.form = this.formBuilder.group({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -43,7 +45,8 @@ export class LoginComponent implements OnInit {
     usuario.senha = this.password!.value;
     this.login$ = this.usuarioService.login(usuario)
       .pipe(finalize((): void => this.login$?.unsubscribe()))
-      .subscribe((): void => {
+      .subscribe((usuario: Usuario): void => {
+        this.stateService.setItem('user', usuario);
         this.goToHome();
       });
   }
