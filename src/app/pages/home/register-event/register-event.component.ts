@@ -55,7 +55,7 @@ export class RegisterEventComponent {
   }
 
   buildForm(): Evento {
-    const evento: Evento = new Evento();
+    const evento: Evento = this.evento ?? new Evento();
     evento.nome = this.name?.value;
     evento.capacidade = this.capacity?.value;
     evento.data = this.date?.value;
@@ -69,12 +69,12 @@ export class RegisterEventComponent {
   }
 
   buildAddress(evento: Evento): void {
-    evento.endereco = new Endereco();
+    evento.endereco = evento.endereco ?? new Endereco();
     evento.endereco.rua = this.street?.value;
     evento.endereco.numero = this.number?.value;
     evento.endereco.bairro =  this.district?.value;
 
-    evento.endereco.cidade = new Cidade();
+    evento.endereco.cidade = evento.endereco.cidade ?? new Cidade();
     evento.endereco.cidade.id = 1;
   }
 

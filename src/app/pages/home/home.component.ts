@@ -162,7 +162,17 @@ export class HomeComponent implements OnInit {
   }
 
   editEvento(): void {
-    console.log("editar");
+    this.destroy$ = this.eventoService.update(this.selectedEvento!)
+      .pipe(finalize((): void => this.destroy$?.unsubscribe()))
+      .subscribe((response: Evento): void => {
+        this.eventos.find((env: Evento, index: number): boolean => {
+          if (env.id === this.selectedEvento?.id) {
+            this.eventos[index] = response;
+            return true;
+          }
+          return false;
+        })
+      });
   }
 
 }

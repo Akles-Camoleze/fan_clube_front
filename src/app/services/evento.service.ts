@@ -21,6 +21,10 @@ export class EventoService {
     return this.http.post<Evento>(`${PATH_API}/event/register`, evento);
   }
 
+  public update(evento: Evento): Observable<Evento> {
+    return this.http.put<Evento>(`${PATH_API}/event/update`, evento);
+  }
+
   public delete(idEvento: number): Observable<any> {
     return this.http.delete(`${PATH_API}/event/${idEvento}`);
   }
