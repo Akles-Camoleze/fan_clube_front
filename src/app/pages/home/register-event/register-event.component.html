@@ -1,6 +1,6 @@
 <p-dialog header="Header" [(visible)]="visible" [style]="{ width: 'fit-content' }" (onHide)="onCloseAction()">
   <ng-template pTemplate="header">
-    <span style="font-size: 20px; font-weight: bold">Novo Evento</span>
+    <span style="font-size: 20px; font-weight: bold">{{evento ? 'Editar' : 'Novo'}} Evento</span>
   </ng-template>
   <form [formGroup]="form">
     <div>
@@ -92,11 +92,23 @@
   </form>
   <ng-template pTemplate="footer">
     <p-button
+      *ngIf="!evento; else edit"
       icon="pi pi-save"
       [disabled]="form.invalid"
       (click)="onConfirmAction()"
       label="Salvar"
       styleClass="button-blue">
     </p-button>
+
+    <ng-template #edit>
+      <p-button
+        icon="pi pi-pencil"
+        [disabled]="form.invalid"
+        (click)="onConfirmAction()"
+        label="Editar"
+        styleClass="button-blue">
+      </p-button>
+
+    </ng-template>
   </ng-template>
 </p-dialog>

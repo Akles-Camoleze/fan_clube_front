@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   eventos$?: Subscription;
   inscricoes: Inscricao[] = [];
   registerEvento: boolean = false;
+  editEventoDialog: boolean = false;
   destroy$?: Subscription;
   usuarioLogged!: Usuario;
   confirmationDialog: boolean = false;
@@ -140,6 +141,10 @@ export class HomeComponent implements OnInit {
 
   showConfirmation(value: boolean = true): void {
     this.confirmationDialog = value;
+  }
+
+  showEdit(value: boolean = true): void {
+    this.editEventoDialog = value;
   }
 
   deleteEvento(): void {

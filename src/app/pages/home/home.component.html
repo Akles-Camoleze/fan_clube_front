@@ -46,7 +46,7 @@
           styleClass="p-button-raised p-button-text"
           appendTo="body"
           [model]="items"
-          (onClick)="selectEvento(evento, 'Deseja editar o evento?', editEvento)"
+          (onClick)="selectEventoOnly(evento); showEdit()"
           (onDropdownClick)="selectEventoOnly(evento)">
         </p-splitButton>
 
@@ -79,6 +79,14 @@
   (onClose)="showConfirmation(false)">
   <p>{{message}}</p>
 </app-dialog-confirmation>
+
+<app-register-event
+  *ngIf="isAdmin() && selectedEvento"
+  [evento]="selectedEvento"
+  [visible]="editEventoDialog"
+  (onClose)="showEdit(false)"
+  (onConfirm)="editEvento()">
+</app-register-event>
 
 <app-register-event
   *ngIf="isAdmin()"

@@ -1,7 +1,5 @@
 import {Component, EventEmitter, Input, Output, SimpleChanges} from '@angular/core';
-import {Usuario} from "../../../entities/Usuario";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {TipoUsuario} from "../../../entities/TipoUsuario";
 import {Endereco} from "../../../entities/Endereco";
 import {Arquivo} from "../../../entities/Arquivo";
 import {Evento} from "../../../entities/Evento";
@@ -14,6 +12,7 @@ import {Cidade} from "../../../entities/Cidade";
 })
 export class RegisterEventComponent {
   @Input() visible: boolean = false;
+  @Input() evento?: Evento;
   @Output() onConfirm: EventEmitter<Evento> = new EventEmitter<Evento>();
   @Output() onClose: EventEmitter<any> = new EventEmitter<any>();
   form: FormGroup;
@@ -32,6 +31,27 @@ export class RegisterEventComponent {
       uf: new FormControl('', [Validators.required, Validators.maxLength(2)]),
       file: new FormControl(''),
     });
+  }
+
+  ngOnInit(): void {
+    this.buildEvento();
+  }
+
+  buildEvento(): void {
+    if (this.evento) {
+      console.log(this.evento.data);
+      this.name?.setValue(this.evento.nome);
+      this.capacity?.setValue(this.evento.capacidade);
+      this.date?.setValue(new Date(this.evento.data));
+      this.description?.setValue(this.evento.descricao);
+      this.value?.setValue(this.evento.valor);
+      this.file?.setValue(this.evento.arquivo);
+      this.street?.setValue(this.evento.endereco.rua);
+      this.number?.setValue(this.evento.endereco.numero);
+      this.district?.setValue(this.evento.endereco.bairro);
+      this.city?.setValue(this.evento.endereco.cidade.nome);
+      this.uf?.setValue(this.evento.endereco.cidade.uf);
+    }
   }
 
   buildForm(): Evento {
