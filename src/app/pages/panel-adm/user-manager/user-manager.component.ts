@@ -46,6 +46,7 @@ export class UserManagerComponent implements OnInit {
       {
         icon: 'pi pi-trash',
         label: 'Excluir',
+        command: (): void => this.deleteUser()
       },
       {
         icon: 'pi pi-pencil',
@@ -80,10 +81,17 @@ export class UserManagerComponent implements OnInit {
   }
 
   selectUser(index: number, usuario: Usuario): void {
-    console.log(index, usuario);
     this.selectedUserIndex = index;
     this.selectedUser = usuario;
   }
 
-  protected readonly parseInt = parseInt;
+  deleteUser(): void {
+    this.usuarios$ = this.usuarioService.delete(this.selectedUser?.id!)
+      .pipe(finalize((): void => this.usuarios$?.unsubscribe()))
+      .subscribe((): void => {
+        delete this.selectedUser;
+        this.usuarios.splice(this.selectedUserIndex, 1);
+      });
+  }
+
 }

@@ -25,8 +25,11 @@ export class UsuarioService {
   }
 
   public update(usuario: Usuario): Observable<Usuario> {
-    console.log(usuario);
     return this.http.put<Usuario>(`${PATH_API}/user/update`, usuario);
+  }
+
+  public delete(idUsuario: number): Observable<any> {
+    return this.http.delete(`${PATH_API}/user/${idUsuario}`);
   }
 
 }
