@@ -36,6 +36,7 @@ import { RegisterEventComponent } from './pages/home/register-event/register-eve
 import {DialogModule} from "primeng/dialog";
 import {DividerModule} from "primeng/divider";
 import {InputTextareaModule} from "primeng/inputtextarea";
+import { DialogConfirmationComponent } from './components/dialog-confirmation/dialog-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import {InputTextareaModule} from "primeng/inputtextarea";
     HeaderComponent,
     PanelAdmComponent,
     UserManagerComponent,
-    RegisterEventComponent
+    RegisterEventComponent,
+    DialogConfirmationComponent
   ],
   imports: [
     BrowserModule,

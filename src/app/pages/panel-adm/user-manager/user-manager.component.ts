@@ -20,6 +20,7 @@ export class UserManagerComponent implements OnInit {
   selectedUserIndex: number = -1;
   tiposUsuarios: TipoUsuario[] = [];
   tiposUsuarios$!: Subscription;
+  confirmationDialog: boolean = false;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -46,7 +47,7 @@ export class UserManagerComponent implements OnInit {
       {
         icon: 'pi pi-trash',
         label: 'Excluir',
-        command: (): void => this.deleteUser()
+        command: (): void => this.showConfirmation()
       },
       {
         icon: 'pi pi-pencil',
@@ -92,6 +93,10 @@ export class UserManagerComponent implements OnInit {
         delete this.selectedUser;
         this.usuarios.splice(this.selectedUserIndex, 1);
       });
+  }
+
+  showConfirmation(value: boolean = true): void {
+    this.confirmationDialog = value;
   }
 
 }

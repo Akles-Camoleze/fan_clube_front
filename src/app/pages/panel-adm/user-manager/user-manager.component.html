@@ -85,6 +85,13 @@
   </ng-template>
 </p-table>
 
+<app-dialog-confirmation
+  [visible]="confirmationDialog"
+  (onConfirm)="deleteUser()"
+  (onClose)="showConfirmation(false)">
+  <p style="text-align: center">Deseja confirmar a operação?</p>
+</app-dialog-confirmation>
+
 <app-edit-user
   *ngIf="selectedUser"
   [usuario]="selectedUser"
