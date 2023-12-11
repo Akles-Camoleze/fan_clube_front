@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   usuarioLogged!: Usuario;
   confirmationDialog: boolean = false;
   selectedEvento?: Evento;
+  loading: boolean = false;
 
   constructor(
     private eventoService: EventoService,
@@ -37,6 +38,7 @@ export class HomeComponent implements OnInit {
   }
 
   getEventos(): void {
+    this.loading = true;
     this.eventos$ = this.eventoService.getAll().pipe(
       finalize((): void => this.eventos$?.unsubscribe())
     ).subscribe((eventos: Evento[]): void => {
@@ -47,7 +49,10 @@ export class HomeComponent implements OnInit {
 
   getUsuarioIncricoes(): void {
     this.destroy$ = this.inscricaoService.findAllByUsuario(this.usuarioLogged.id).pipe(
-      finalize((): void => this.destroy$?.unsubscribe())
+      finalize((): void => {
+        this.destroy$?.unsubscribe();
+        this.loading = false;
+      })
     ).subscribe((response: Inscricao[]): void => {
       this.inscricoes = response;
       console.log(this.inscricoes);
@@ -66,9 +71,9 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  subscribe(evento: Evento): void {
+  subscribe(): void {
     const inscricao: Inscricao = new Inscricao();
-    inscricao.evento = evento;
+    inscricao.evento = this.selectedEvento!;
     inscricao.usuario = this.usuarioLogged;
     this.destroy$ = this.inscricaoService.register(inscricao)
       .pipe(finalize((): void => this.destroy$?.unsubscribe()))

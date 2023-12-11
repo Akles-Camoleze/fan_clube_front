@@ -1,7 +1,10 @@
 <app-header></app-header>
 
 <h1 id="title">Listagem de Eventos</h1>
-<div id="grid">
+<div *ngIf="loading" style="width: 100%; text-align: center">
+  <p-progressSpinner></p-progressSpinner>
+</div>
+<div *ngIf="!loading" id="grid">
   <p-card *ngFor="let evento of eventos" [header]="evento.nome" [style]="{ width: '360px' }">
     <ng-template pTemplate="header">
       <div style="width: 360px; height: 130px">
@@ -34,7 +37,7 @@
           label="Inscrever-se"
           icon="pi pi-calendar-plus"
           styleClass="p-button-raised button-blue"
-          (onClick)="subscribe(evento)">
+          (onClick)="selectEvento(evento)">
         </p-button>
 
         <ng-template #uns>
@@ -60,10 +63,11 @@
 </div>
 
 <app-dialog-confirmation
+  *ngIf="selectedEvento"
   [visible]="confirmationDialog"
-  (onConfirm)="unsubscribe()"
+  (onConfirm)="!verifySubscription(selectedEvento) ? subscribe() : unsubscribe()"
   (onClose)="showConfirmation(false)">
-  <p>Realmente deseja se desinscrever do evento?</p>
+  <p>Deseja {{!verifySubscription(selectedEvento!) ? 'inscrever-se' : 'desinscrever-se'}} no evento?</p>
 </app-dialog-confirmation>
 
 <app-register-event

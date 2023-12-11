@@ -37,6 +37,7 @@ import {DialogModule} from "primeng/dialog";
 import {DividerModule} from "primeng/divider";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import { DialogConfirmationComponent } from './components/dialog-confirmation/dialog-confirmation.component';
+import {ProgressSpinnerModule} from "primeng/progressspinner";
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { DialogConfirmationComponent } from './components/dialog-confirmation/di
     FormsModule,
     DialogModule,
     DividerModule,
-    InputTextareaModule
+    InputTextareaModule,
+    ProgressSpinnerModule
   ],
   providers: [
     UsuarioService,
